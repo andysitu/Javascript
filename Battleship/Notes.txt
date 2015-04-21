@@ -1,0 +1,21 @@
+TO SEARCH:
+WHY won't this.gridWidth work or why can't I refer to this instead of using controller when the method refers to another
+property.
+
+
+Tasks Needed:
+Onload, generate coordinates of ships;
+Store coordinates onto an array.
+Onclick/onkeypress, convert coordinates from A0 to 00 as ex;
+Compare coordinate with those in array;
+	If missed, then give message of missed, show miss image, increase counter of shots used;
+	If hit, give message of hit, show ship.png into table, test if hit before: increase hit counter and mark array true,
+	increase counter of shots used.
+When all ships have been destroyed,
+	show message of vitory, show number of hits and accuracy, end game.
+
+
+
+
+Possible ideas:
+Add timer - repair ships on its own after a certain amount of tries, add different weapons
