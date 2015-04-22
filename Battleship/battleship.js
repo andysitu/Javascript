@@ -7,7 +7,9 @@ var controller = {
 	shipLength: 3,
 	gridWidth: 7,
 	gridHeight: 7,
-	shipLoc: [],
+	shipLoc: [ 	{ships: [1, 0, 0], hits: ["", "", ""]},
+				{ships: [0, 0, 0], hits: ["", "", ""]},
+				{ships: [0, 0, 0], hits: ["", "", ""]} ],
 
 	processGuess: function(guess) {
 		console.log(this.shipLength);
@@ -17,31 +19,36 @@ var controller = {
 		var x, y, dirc, loc1, loc2, loc3, i = 0;
 		var locations = [];
 
-		for (var i = 0; i < 3; i++) {
-			x = Math.floor(Math.random() * (this.gridWidth - this.shipLength + 2));
-			y = Math.floor(Math.random() * (this.gridWidth - this.shipLength + 2));
-			loc1 = x.toString() + y.toString();
-			dir = Math.floor(Math.random() * 2);	
-			console.log(x, y, loc1);
+		x = Math.floor(Math.random() * (this.gridWidth - this.shipLength + 2));
+		y = Math.floor(Math.random() * (this.gridWidth - this.shipLength + 2));
+		loc1 = x.toString() + y.toString();
+		dir = Math.floor(Math.random() * 2);	
+		console.log(x, y, loc1);
 
-			if (dir == 0) {
-				for (var j = 0; j < this.shipLength; j++) {
-					this.shipLoc.push( (x + j) + "" + y);
-				}
-			} else {
-				for (var j = 0; j < this.shipLength; j++) {
-					this.shipLoc.push( x + "" + (y+ j) );
-				}
+		if (dir == 0) {
+			for (var j = 0; j < this.shipLength; j++) {
+				locations.push( (x + j) + "" + y);
 			}
-
-//			if (controller.shipLoc.indexOf(loc1) != -1 || controller.shipLoc.indexOf(loc2) != -1 || 
-//				controller.shipLoc.indexOf(loc3) != -1) {
-//				continue;
-//			}
-
+		} else {
+			for (var j = 0; j < this.shipLength; j++) {
+				locations.push( x + "" + (y+ j) );
+			}
 		}
 
-		return this.shipLoc; 
+		console.log(locations);
+		return locations; 
+	},
+
+	collisions: function(arr) {
+		for (var j = 0; j < this.numShips; j++) {
+			var loc = this.shipLoc[j];
+			for (var k = 0; k < this.shipLength; k++) {
+				if (loc.ships.indexOf(arr[k]) >= 0)
+					return true;
+			}
+		}
+
+		return false;
 	}
 };
 
