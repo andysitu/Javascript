@@ -15,39 +15,33 @@ var controller = {
 
 	generateShips: function() {
 		var x, y, dirc, loc1, loc2, loc3, i = 0;
+		var locations = [];
 
-
-		while (i < 3) {
-			console.log("2");
-			x = Math.floor(Math.random() * (controller.gridWidth - controller.shipLength + 1));
-			y = Math.floor(Math.random() * (controller.gridWidth - controller.shipLength + 1));
+		for (var i = 0; i < 3; i++) {
+			x = Math.floor(Math.random() * (this.gridWidth - this.shipLength + 2));
+			y = Math.floor(Math.random() * (this.gridWidth - this.shipLength + 2));
 			loc1 = x.toString() + y.toString();
-			console.log(dir = Math.floor(Math.random() * 2));	
+			dir = Math.floor(Math.random() * 2);	
 			console.log(x, y, loc1);
 
 			if (dir == 0) {
-				loc2 = (x+1) * 10 + y;
-				loc3 = (x+2) * 10 + y;
-				loc2 = loc2.toString();
-				loc3 = loc3.toString();
+				for (var j = 0; j < this.shipLength; j++) {
+					this.shipLoc.push( (x + j) + "" + y);
+				}
 			} else {
-				loc2 = x * 10 + (y+1);
-				loc3 = x * 10 + (y+2);
-				loc2 = loc2.toString();
-				loc3 = loc3.toString();
+				for (var j = 0; j < this.shipLength; j++) {
+					this.shipLoc.push( x + "" + (y+ j) );
+				}
 			}
 
-			console.log(loc1, loc2, loc3);
+//			if (controller.shipLoc.indexOf(loc1) != -1 || controller.shipLoc.indexOf(loc2) != -1 || 
+//				controller.shipLoc.indexOf(loc3) != -1) {
+//				continue;
+//			}
 
-			if (controller.shipLoc.indexOf(loc1) != -1 || controller.shipLoc.indexOf(loc2) != -1 || 
-				controller.shipLoc.indexOf(loc3) != -1) {
-				continue;
-			}
-			controller.shipLoc.push(loc1); 
-			controller.shipLoc.push(loc2);
-			controller.shipLoc.push(loc3);
-			i++;
-		} 
+		}
+
+		return this.shipLoc; 
 	}
 };
 
@@ -62,4 +56,4 @@ var test = {
 
 };
 
-window.onload = controller.generateShips;
+window.onload = controller.generateShips();
