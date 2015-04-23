@@ -67,12 +67,30 @@ var controller = {
 	}
 };
 
-var test = {
-	tester: function() {
-	var where = document.getElementById("messageArea");
-	where.innerHTML = "Hello";	
-}
 
+function onLoadFunction() {	
+	var buttonLoc = document.getElementById("guessInput");
+	var msgArea = document.getElementById("messageArea");
+	var clickLoc = document.getElementById("fireButton");
+
+	function uponClick() {
+		console.log(buttonLoc.value);
+		buttonLoc.value = "";
+	};
+
+	function ifEnter(key) {
+		if (key.keyCode === 13) {
+			clickLoc.click();
+			return false;
+		}
+	}
+
+	clickLoc.onclick =	uponClick;
+
+	buttonLoc.onkeypress = ifEnter;
+
+	controller.generator();
 };
 
-window.onload = controller.generator();
+
+window.onload = onLoadFunction;
