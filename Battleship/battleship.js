@@ -3,11 +3,10 @@
 
 var controller = {
 	numShips: 3,
-	shipsLeft: 0,
 	shipLength: 3,
 	gridWidth: 7,
 	gridHeight: 7,
-	shipLoc: [ 	{ships: [1, 0, 0], hits: ["", "", ""]},
+	shipLoc: [ 	{ships: [0, 0, 0], hits: ["", "", ""]},
 				{ships: [0, 0, 0], hits: ["", "", ""]},
 				{ships: [0, 0, 0], hits: ["", "", ""]} ],
 
@@ -15,7 +14,23 @@ var controller = {
 		console.log(this.shipLength);
 	},
 
-	generateShips: function() {
+// Uses a do while loop where as long as collisions matches, it returns true
+// and the loop keeps on running.
+	generator: function() {
+		var i = 0, arrTest;
+		while (i < this.numShips) {
+			do {
+				arrTest = this.generateShip();
+			} while (this.collisions(arrTest));
+			this.shipLoc[i].ships = arrTest;
+			i++;
+		}
+
+		return "";
+	},
+
+//Generates an array locations
+	generateShip: function() {
 		var x, y, dirc, loc1, loc2, loc3, i = 0;
 		var locations = [];
 
@@ -23,7 +38,6 @@ var controller = {
 		y = Math.floor(Math.random() * (this.gridWidth - this.shipLength + 2));
 		loc1 = x.toString() + y.toString();
 		dir = Math.floor(Math.random() * 2);	
-		console.log(x, y, loc1);
 
 		if (dir == 0) {
 			for (var j = 0; j < this.shipLength; j++) {
@@ -35,10 +49,11 @@ var controller = {
 			}
 		}
 
-		console.log(locations);
 		return locations; 
 	},
 
+//Tests arr if it a location in controller.shipLoc already exists.
+//Directly searches with indexOf of the object so don't let this be arr.
 	collisions: function(arr) {
 		for (var j = 0; j < this.numShips; j++) {
 			var loc = this.shipLoc[j];
@@ -52,9 +67,6 @@ var controller = {
 	}
 };
 
-
-var ship
-
 var test = {
 	tester: function() {
 	var where = document.getElementById("messageArea");
@@ -63,4 +75,4 @@ var test = {
 
 };
 
-window.onload = controller.generateShips();
+window.onload = controller.generator();
