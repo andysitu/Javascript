@@ -6,6 +6,7 @@ var controller = {
 	shipLength: 3,
 	gridWidth: 7,
 	gridHeight: 7,
+	numOfHits: 0,
 	shipLoc: [ 	{ships: [0, 0, 0], hits: ["", "", ""]},
 				{ships: [0, 0, 0], hits: ["", "", ""]},
 				{ships: [0, 0, 0], hits: ["", "", ""]} ],
@@ -67,6 +68,30 @@ var controller = {
 	}
 };
 
+function msg(message) {
+	var msgArea = document.getElementById("messageArea");
+	msgArea.innerHTML = message;
+}
+
+function hitOrMiss(value) {
+	var index;
+	var shipObj = controller.shipLoc;
+	for (var i = 0; i < controller.numShips; i++) {
+		console.log(shipObj[i].ships);
+		if ((index = shipObj[i].ships.indexOf(value)) >= 0) {
+			if (shipObj[i].hits[index] == true) {
+				msg("You have already hit this location!");
+				return value;
+			} else {
+				msg("Hit!");
+				shipObj[i].hits[index] = true;
+				return value;
+			}
+		} else {
+			msg("MISS!");
+		}
+	}
+}
 
 function onLoadFunction() {	
 	var buttonLoc = document.getElementById("guessInput");
@@ -91,6 +116,5 @@ function onLoadFunction() {
 
 	controller.generator();
 };
-
 
 window.onload = onLoadFunction;
