@@ -68,10 +68,23 @@ var controller = {
 	}
 };
 
-function msg(message) {
-	var msgArea = document.getElementById("messageArea");
-	msgArea.innerHTML = message;
-}
+var message = {
+	msg: function(message) {
+		var msgArea = document.getElementById("messageArea");
+		msgArea.innerHTML = message;
+	},
+
+	hit: function(location) {
+		var loc = document.getElementById(location);
+		loc.setAttribute("class", "hit");
+	},
+
+	miss: function(location) {
+		var loc = document.getElementById(location);
+		loc.setAttribute("class", "miss");
+	}
+};
+
 
 function hitOrMiss(value) {
 	var index;
@@ -80,24 +93,26 @@ function hitOrMiss(value) {
 		console.log(shipObj[i].ships);
 		if ((index = shipObj[i].ships.indexOf(value)) >= 0) {
 			if (shipObj[i].hits[index] == true) {
-				msg("You have already hit this location!");
+				message.msg("You have already hit this location!");
 				return value;
 			} else {
-				msg("Hit!");
+				message.msg("Hit!");
+				message.hit(value);
 				shipObj[i].hits[index] = true;
 				controller.numOfHits++;
 				return value;
 			}
-		} else {
-			msg("MISS!");
 		}
-	}
+	}	
+
+	message.msg("Miss!");
+	message.miss(value);
 }
 
 function converter(value) {
 	var a, b;
 	if (typeof value != "string") {
-		msg("I need a string value!");
+		message.msg("I need a string value!");
 		return false;
 	}
 	else {
@@ -109,11 +124,11 @@ function converter(value) {
 			case "D": a = "3"; break;
 			case "E": a = "4"; break;
 			case "F": a = "5"; break;
-			case "G": a = "7"; break;
+			case "G": a = "6"; break;
 			default: break;
 		}
 		var b = value.charAt(1);
-		hitOrMiss(a +  b);
+		hitOrMiss(a + "" + b);
 	}
 };
 
