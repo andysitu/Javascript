@@ -6,14 +6,11 @@ var controller = {
 	shipLength: 3,
 	gridWidth: 7,
 	gridHeight: 7,
+	numOfShots: 0,
 	numOfHits: 0,
 	shipLoc: [ 	{ships: [0, 0, 0], hits: ["", "", ""]},
 				{ships: [0, 0, 0], hits: ["", "", ""]},
 				{ships: [0, 0, 0], hits: ["", "", ""]} ],
-
-	processGuess: function(guess) {
-		console.log(this.shipLength);
-	},
 
 // Uses a do while loop where as long as collisions matches, it returns true
 // and the loop keeps on running.
@@ -90,7 +87,6 @@ function hitOrMiss(value) {
 	var index;
 	var shipObj = controller.shipLoc;
 	for (var i = 0; i < controller.numShips; i++) {
-		console.log(shipObj[i].ships);
 		if ((index = shipObj[i].ships.indexOf(value)) >= 0) {
 			if (shipObj[i].hits[index] == true) {
 				message.msg("You have already hit this location!");
@@ -100,13 +96,21 @@ function hitOrMiss(value) {
 				message.hit(value);
 				shipObj[i].hits[index] = true;
 				controller.numOfHits++;
+				controller.numOfShots++;
+				if (controller.numOfHits === controller.numShips * controller.shipLength) {
+					var accuracy = (controller.numOfHits / controller.numOfShots).toString();
+					var accuracy = accuracy.substr(0, 5);
+					message.msg("You've hit all the ships!\nYou Win!\nAccuracy: " + accuracy);
+				}
 				return value;
 			}
 		}
 	}	
 
 	message.msg("Miss!");
+	controller.numOfShots++;
 	message.miss(value);
+	return false;
 }
 
 function converter(value) {
