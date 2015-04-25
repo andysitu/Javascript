@@ -85,6 +85,7 @@ function hitOrMiss(value) {
 			} else {
 				msg("Hit!");
 				shipObj[i].hits[index] = true;
+				controller.numOfHits++;
 				return value;
 			}
 		} else {
@@ -93,13 +94,36 @@ function hitOrMiss(value) {
 	}
 }
 
+function converter(value) {
+	var a, b;
+	if (typeof value != "string") {
+		msg("I need a string value!");
+		return false;
+	}
+	else {
+		var first = value.charAt(0).toUpperCase();
+		switch (first) {
+			case "A": a = "0"; break;
+			case "B": a = "1"; break;
+			case "C": a = "2"; break;
+			case "D": a = "3"; break;
+			case "E": a = "4"; break;
+			case "F": a = "5"; break;
+			case "G": a = "7"; break;
+			default: break;
+		}
+		var b = value.charAt(1);
+		hitOrMiss(a +  b);
+	}
+};
+
 function onLoadFunction() {	
 	var buttonLoc = document.getElementById("guessInput");
 	var msgArea = document.getElementById("messageArea");
 	var clickLoc = document.getElementById("fireButton");
 
 	function uponClick() {
-		console.log(buttonLoc.value);
+		converter(buttonLoc.value.toString());
 		buttonLoc.value = "";
 	};
 
