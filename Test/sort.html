@@ -7,40 +7,34 @@
 	<body>
 		<script>
 			function sort(obj) {
-				var len = obj.length, arr1 = [], arr =[];
-				for (var i = 0; i < obj.length; i++) {
-					arr[i] = obj[i];
-				}
+				var len = obj.length, arr1 = [], j = 2;
 
-				if (arr[1] > arr[0]) {
-					arr1.push(arr[0], arr[1]);
+				if (obj[1] > obj[0]) {
+					arr1.push(obj[0], obj[1]);
 				} else {
-					arr1.push(arr[1], arr[0]);
+					arr1.push(obj[1], obj[0]);
 				}
-				arr.shift(); 
-				arr.shift();
 
-				for ( ; arr.length != 0 ; ) {
-					for (var j = 0; j < arr1.length; j++) {
-						if ( (arr[0] > arr1[j]) && (arr[0] < arr1[j+1]) ) {
-							arr1.splice(j+1, 0, arr[0]);
-							console.log("TEST");
+				while (j < obj.length) {
+					for (var i = 0; i < arr1.length; i++) {
+						if ( (obj[j] >= arr1[i]) && (obj[j] <= arr1[i+1]) ) {
+							arr1.splice(i+1, 0, obj[j]);
 							break;	
 						}
-						else if (arr[0] > arr1[arr1.length - 1]) {
-							console.log("BI" + arr1.push(arr[0]));
+						else if (obj[j] >= arr1[arr1.length - 1]) {
+							arr1.push(obj[j]);
 							break;
 						}
-						else if (arr[0] < arr1[0]) {
-							console.log(arr1.unshift(arr[0]));
-							break
+						else if (obj[j] <= arr1[0]) {
+							arr1.unshift(obj[j]);
+							break;	
 						}
 					}
 
-					arr.shift();
+					j++
 				} 
 
-				console.log(arr1, arr);
+				return arr1;
 			}
 		</script>
 	</body>
