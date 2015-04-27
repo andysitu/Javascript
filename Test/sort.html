@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>HI</title>
+	</head>
+	<body>
+		<script>
+			function sort(obj) {
+				var len = obj.length, arr1 = [], arr =[];
+				for (var i = 0; i < obj.length; i++) {
+					arr[i] = obj[i];
+				}
+
+				if (arr[1] > arr[0]) {
+					arr1.push(arr[0], arr[1]);
+				} else {
+					arr1.push(arr[1], arr[0]);
+				}
+				arr.shift(); 
+				arr.shift();
+
+				for ( ; arr.length != 0 ; ) {
+					for (var j = 0; j < arr1.length; j++) {
+						if ( (arr[0] > arr1[j]) && (arr[0] < arr1[j+1]) ) {
+							arr1.splice(j+1, 0, arr[0]);
+							console.log("TEST");
+							break;	
+						}
+						else if (arr[0] > arr1[arr1.length - 1]) {
+							console.log("BI" + arr1.push(arr[0]));
+							break;
+						}
+						else if (arr[0] < arr1[0]) {
+							console.log(arr1.unshift(arr[0]));
+							break
+						}
+					}
+
+					arr.shift();
+				} 
+
+				console.log(arr1, arr);
+			}
+		</script>
+	</body>
+</html>
