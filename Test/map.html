@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+	<script>
+		function map(list, func, context) {
+			if (Object.prototype.toString.apply(list) === "[object Array]") {
+				var arr =[];
+				{ 	for (var i = 0; i < list.length; i++) {
+					arr[i] = func(list[i]);
+					}
+				}
+				return arr;
+			} else {
+				var arr = [];
+				for (par in list) {
+					arr.push(func(list[par]));
+				}
+				return arr;
+			}
+		}	
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
