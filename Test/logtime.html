@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+	<script>
+		var start = new Date().getTime();
+
+		for (var i = 0, sum; i <= 5e6; i++) {
+			sum += i;
+		}
+
+		var end = new Date().getTime();
+
+		console.log(end - start);
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
