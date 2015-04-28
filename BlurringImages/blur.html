@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<meta charset="utf-8">
+	<title>Guess the Image</title>
+	
+	<style> 
+		body {margin: 20px}
+		img {margin: 20px}
+	</style>
+	
+	<script>
+		function init() {
+			var images = document.getElementsByTagName("img");
+			for (var i = 0; i < images.length; i++) {
+				images[i].onclick = showAnswer;
+			}
+		}
+		
+		function showAnswer(eventObj) {
+			var image = eventObj.target;
+			var name = image.id;
+			if (image.src.indexOf("blur") >0) {
+				name = "blur_images/" + name + ".jpg";			
+			} else {
+				name = "blur_images/" + name + "blur.jpg";
+			}
+			image.src = name;
+		}
+		window.onload = init;
+		
+	</script>
+</head>
+
+<body>
+	<img id="zero" src="blur_images/zeroblur.jpg">
+	<img id="one" src="blur_images/oneblur.jpg">
+	<img id="two" src="blur_images/twoblur.jpg">
+	<img id="three" src="blur_images/threeblur.jpg">
+	<img id="four" src="blur_images/fourblur.jpg">
+	<img id="five" src="blur_images/fiveblur.jpg">
+</body>
+
+</html>
