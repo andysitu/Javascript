@@ -44,6 +44,45 @@
 		fido.run();
 		fido.wag();
 
+		var ralph = new Dog("Ralph", "Who Knows", 40);
+		ralph.bark = function() {
+			console.log("rawr");
+		}
+
+		function ShowDog(name, breed, weight, handler) {
+// Call function uses the first parameter as the value of this (normall)
+// In this cause, this in the call line refers to ShowDog that will
+// be used in this for the Dog function
+			Dog.call(this, name, breed, weight, handler);			
+//			this.name = name;
+//			this.breed = breed;
+//			this.weight = weight;
+			this.handler = handler;
+		}
+
+		var a = new Dog();
+
+		// Assigns new dog straight to prototype property of Dog()
+		// thus ShowDog prototype inherits from Dog prototype
+		ShowDog.prototype = new Dog();
+
+		ShowDog.prototype.league = "Webville";
+
+		ShowDog.prototype.stack = function() {
+			console.log("Stack");
+		}
+
+		ShowDog.prototype.bait = function() {
+			console.log("Bait");
+		}
+
+		var scotty = new ShowDog("Scotty", "Scottish Terrier", 15, "cookie");
+
+		console.log(scotty.constructor);
+		console.log(scotty instanceof ShowDog);
+
+		scotty.bark();
+		scotty.bait();
 	</script>
 </head>
 
