@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>0</title>
+
+	<style>
+	</style>
+
+	<script>
+		function runIt() {
+			var element = document.getElementById("display"), i = 0;
+			element.innerHTML = element.innerHTML + "AHH. ";
+		}
+	</script>
+</head>
+
+<body>
+	<p id="display">
+		Don't size the window!
+	</p>
+
+	<script>
+		window.onresize = runIt;
+	</script>
+</body>
+
+</html>

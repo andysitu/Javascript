@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+	<script>
+		window.onload = init;
+
+		function init() {
+			var maps = document.getElementById("map");
+			maps.onmousemove = runit;
+		}
+
+		function runit(eventObj) {
+			var changeThis = document.getElementById("coord");
+//			console.log(eventObj);
+//			changeThis.innerHTML = "Map coordinates: " + eventObj.x + ", " + eventObj.y;
+			changeThis.innerHTML = "Map coordinates: " + eventObj.pageX + ", " + eventObj.pageY;
+		}
+
+	</script>
+</head>
+
+<body>
+	<img id="map" src="map.jpg">
+	<p id="coord">Move the map to get the coordinates</p>
+</body>
+
+</html>
