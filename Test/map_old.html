@@ -14,11 +14,10 @@
 				var arr =[];
 				{ 	for (var i = 0; i < list.length; i++) {
 					arr[i] = iteratee(list[i]);
-					}
+					}	
 				}
 				return arr;
 			} else {
-				console.log(context);
 				var arr = [];
 				for (par in list) {
 					arr.push(iteratee(list[par]));
@@ -27,11 +26,25 @@
 			}
 		}	
 
-		map([1, 2, 3], function(num){ return num * 3; });
+
+		function first(arr, n){
+			var arr1 = [];
+			if (n === undefined) {
+				return arr[0];
+			} else {
+				if (n>= arr.length) n = arr.length;
+				for (var i = 0; i < n; i++) {
+					arr1.push(arr[i]);
+				}
+			}
+			return arr1;
+		}
+
 	</script>
 </head>
 
 <body>
+	
 </body>
 
 </html>
