@@ -19,10 +19,10 @@
 				return arr;
 			} else {
 				var arr = [];
-				for (par in list) {
-					arr.push(iteratee(list[par]));
+				for (key in list) {
+					arr.push(iteratee.call(context, list[key], key, list));
 				}
-				return arr;
+				return arr;	
 			}
 		}	
 	</script>
