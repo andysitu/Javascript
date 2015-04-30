@@ -9,17 +9,17 @@
 	</style>
 
 	<script>
-	function first(arr, n){
+	function first(arr, n, testcase){
 		var arr1 = [];
-		if (n === undefined) {
+		if (n === undefined || testcase) {
 			return arr[0];
 		} else {
 			if (n>= arr.length) n = arr.length;
 			for (var i = 0; i < n; i++) {
 				arr1.push(arr[i]);
 			}
-		}
 		return arr1;
+		}
 	}
 	</script>
 </head>
