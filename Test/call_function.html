@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+	<script>
+		function test(a, b, c, d, e) {
+			var sum = 0;
+			sum = a + b + c + d + e;
+			this.sum = sum;
+		}
+
+		var obj = {};
+		var obj1 = {};
+
+		test.call(obj, 1, 2, 3, 4, 5);
+		console.log(obj.sum); // -> 15
+		test.apply(obj1, [1,2,3,4,5]);
+		console.log(obj1.sum); // -> 15
+
+		function test1() {
+			var sum = 0;
+			// relies on arguments
+			for (var i=0; i < arguments.length; i++) {
+				sum += arguments[i];
+			}
+
+			this.sums = sum;
+		}
+
+		test1.call(obj, 1, 2, 3, 4, 5);
+		console.log(obj.sums); // -> 15
+		test1.call(obj, 1,2,3,4,5,6,7,8);
+		console.log(obj.sums); // -> 36
+		test1.apply(obj1, [1,2,3,4,5,6,7,8]);
+		console.log(obj1.sums); // -> 36
+
+		function test3(a,b,c,d,e,f) {
+			var sum = 0;
+			sum = a + b + c + d + e ; // if use f, sum -> NaN
+			console.log(this.sum1 = sum);
+			console.log(this);
+			console.log(this === undefined); // -> false
+			// this is undefined
+		}
+
+		test3.call(1,2,3,4,5,6); // - > 20, not 21
+		console.log(this.sum1);
+
+		function test4(a,b,c,d,e) {
+			var sum = 0;
+			sum = a + b + c + d + e;
+			console.log(sum);
+			console.log(this);
+		}
+
+		test4.call(1,2,3,4,5); // -> NaN
+		test4.call(1,2,3,4,5,6); // -> 20
+
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
