@@ -13,10 +13,9 @@
 			if (Object.prototype.toString.apply(list) === "[object Array]") {
 				var arr =[];
 				{ 	for (var i = 0; i < list.length; i++) {
-					arr[i] = iteratee(list[i]);
+					arr[i] = iteratee.call(context, list[i], i, list);
 					}
 				}
-				console.log(arr);
 				return arr;
 			} else {
 				var arr = [];
@@ -26,8 +25,6 @@
 				return arr;
 			}
 		}	
-
-		map([1, 2, 3], function(num){ return num * 3; });
 	</script>
 </head>
 
