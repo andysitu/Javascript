@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	table { background-color: red; }
+	</style>
+
+</head>
+
+<body>
+	<table id="here">
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+		</tr>
+	</table>
+
+	<script>
+		var arr = [];
+
+		var loc = document.getElementById("here");
+		var tr = document.createElement("tr");
+		var td = document.createElement("td");
+		td.appendChild(document.createTextNode("Hello"));
+		tr.appendChild(td);
+		loc.appendChild(tr);
+	</script>	
+</body>
+
+</html>
