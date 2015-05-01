@@ -6,7 +6,13 @@
 	<title>Testing</title>
 
 	<style>
-	table { background-color: red; }
+	table { background-color: red;
+			border: 1px solid black;
+			margin-left:auto; 
+   			margin-right:auto; }
+   	th, td {	width: 20px;
+   				height: 20px; }
+   	#one {	font-size: 200%; }
 	</style>
 
 </head>
@@ -14,21 +20,21 @@
 <body>
 	<table id="here">
 		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
+			<th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
 		</tr>
 	</table>
 
 	<script>
-		var arr = [];
+		var arr = [1,2,3,4];
 
+	for (var i = 0; i < arr.length ; i++) {
 		var loc = document.getElementById("here");
 		var tr = document.createElement("tr");
 		var td = document.createElement("td");
-		td.appendChild(document.createTextNode("Hello"));
+		td.appendChild(document.createTextNode(arr[i]));
 		tr.appendChild(td);
 		loc.appendChild(tr);
+	}
 	</script>	
 </body>
 
