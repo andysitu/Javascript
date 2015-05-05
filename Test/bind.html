@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+	<script>
+		function bind(func, obj, arg){
+			function funct() {
+				func.call(obj, arg);
+			}
+
+			return funct;
+		}
+
+		var funck = function(greeting){ return greeting + ': ' + this.name };
+		funcker = bind(funck, {name: 'moe'}, 'hi');
+		console.log(funcker);
+		funcker();
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
