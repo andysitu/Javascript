@@ -4,22 +4,25 @@
 <head>
 	<meta charset="utf-8">
 	<title>Testing</title>
-
+fun
 	<style>
 	</style>
 
 	<script>
 		function bind(func, obj, arg){
-			function funct() {
-				func.call(obj, arg);
+			var mes = "HI";
+			var obj = obj;
+			var func = func;
+			var arg = arg;
+			function funk() {
+				// funk doesn't save local scope, only one above with closure
+				return func.call(obj, arg);
 			}
-
-			return funct;
+			return funk;
 		}
 
-		var funck = function(greeting){ return greeting + ': ' + this.name };
-		funcker = bind(funck, {name: 'moe'}, 'hi');
-		console.log(funcker);
+		var funck = function(greeting) { return greeting + ': ' + this.name ; };
+		var funcker = bind(funck, {name: 'moe'}, 'hi');
 		funcker();
 	</script>
 </head>
