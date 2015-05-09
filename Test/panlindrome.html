@@ -28,26 +28,27 @@
 		}		
 
 		function isPanlindrome(text) {
+			var text = text.toUpperCase();
 			if (text.length <= 1) return true;
 			if (text.charAt(0) != text.charAt(text.length -1)) return false;
 			return isPanlindrome(text.substr(1, text.length-2));
 		}
 
 		function init() {
-			var click = document.getElementById("clicky");
+			var clicky = document.getElementById("clicky");
 			var typedHere = document.getElementById("input");
 
 			function clicked() {
-				input(typedHere.value);
+				input(typedHere.value.toString());
 				typedHere.value = "";
+				return false;
 			}
 
-			click.onclick = clicked;
+			clicky.onclick = clicked;
 
 			typedHere.onkeypress = function(text) {
 				if (text.keyCode === 13) {
-					click.click();`
-					return true;
+					clicky.click();
 				}
 			};
 		}
