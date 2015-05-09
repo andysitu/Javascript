@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+</head>
+
+<body>
+	<form>
+		<input type="text" id="input" placeholder="Type a Word">
+		<input type="button" id="clicky" value="Enter">
+	</form>
+	<div id="msg"></div>
+
+	<script>
+		function input(text) {
+			var msg = document.getElementById("msg")
+			if (isPanlindrome(text)) {
+				msg.innerHTML = "Yes, this is a palindrome";
+			} else {
+				msg.innerHTML = "No, this isn't a panlndrome";
+			}
+		}		
+
+		function isPanlindrome(text) {
+			if (text.length <= 1) return true;
+			if (text.charAt(0) != text.charAt(text.length -1)) return false;
+			return isPanlindrome(text.substr(1, text.length-2));
+		}
+
+		function init() {
+			var click = document.getElementById("clicky");
+			var typedHere = document.getElementById("input");
+
+			function clicked() {
+				input(typedHere.value);
+				typedHere.value = "";
+			}
+
+			click.onclick = clicked;
+
+			typedHere.onkeypress = function(text) {
+				if (text.keyCode === 13) {
+					click.click();`
+					return true;
+				}
+			};
+		}
+
+		window.onload = init;
+	</script>	
+</body>
+
+</html>
