@@ -1,0 +1,25 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+	</style>
+</head>
+
+<body>
+	<script>
+		// Immediate function: variable numClicks is only
+		// available to it and visible to nowhere else.
+		// Also, it's being saved.
+		(function(){
+			var numClicks = 0;
+			document.addEventListener("click", function() {
+				alert(numClicks++);
+			}, false);
+		})();
+	</script>
+	
+</body>
+
+</html>
