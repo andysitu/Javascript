@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+</head>
+
+<body>
+	<script>
+		function sort_insertion(arr) {
+			for (var i = 1; i < arr.length; i++) {
+				var key = arr[i];
+				var next = i - 1;
+				while (next >= 0 && arr[next] > key) {
+					arr[next + 1] = arr[next];
+					next = next - 1;
+					arr[next + 1] = key;
+				}
+			}
+
+			console.log(arr);
+			return arr;
+		}
+
+		sort_insertion([5, 7, 8, 1, 3, 5, 2, 2]);
+	</script>	
+</body>
+
+</html>
