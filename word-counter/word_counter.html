@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Enter</title>
+
+	<style>
+	#textbox {
+		height: 50px;
+		width: 175px;
+	}
+
+	.Box {
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	</style>
+</head>
+
+<body>
+	<div class="Box" id="test">
+		Enter Something:
+	<form>
+		<input type="textbox" id="textbox">
+		<input type="button" value="Enter" id="enter">
+	</form>
+	</div>
+	<div id="msg"></div>
+
+	<script>
+		var test = document.getElementById("msg");
+		var clicker = document.getElementById("enter");
+		var box = document.getElementById("textbox");
+
+		
+		window.onload = function() {
+			clicker.onclick = function() {
+				test.innerHTML = box.value;
+			}
+		};
+	</script>
+
+</body>
+</html>
