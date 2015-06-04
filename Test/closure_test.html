@@ -1,0 +1,52 @@
+<!doctype html>
+
+<!--From http://javascriptissexy.com/understand-javascript-closures-with-ease/
+	-->
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+</head>
+
+<body>
+	<script type="text/javascript">
+
+		function celebrityIDCreator(theCelebritiies) {
+			var i;
+			var uniqueID = 100;
+
+			for (i = 0; i < theCelebritiies.length; i++) {
+				theCelebritiies[i]["id"] = (function(j) {
+					return (function() {
+						return uniqueID + j;
+					})()
+				// i is used immediately for j
+				})(i);
+
+			}
+
+			// array is returned to give structure of theCelbrities[i][id] with the
+			// same structure and values being returned.
+			return theCelebritiies;
+		}
+	
+		var actionCelebs = [{name:"Stallone", id:0}, {name:"Cruise", id:0}, {name:"Willis", id:0}];
+
+		var createIdForActionCelebs = celebrityIDCreator(actionCelebs);
+
+		var stalloneID = createIdForActionCelebs[0];
+		console.log(stalloneID.id);
+
+		var cruisID = createIdForActionCelebs[1];
+		console.log(cruisID.id);
+
+
+	</script>	
+</body>
+
+</html>
