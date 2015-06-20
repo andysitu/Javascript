@@ -1,0 +1,60 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+
+		var currier = function(fn) {
+		  var args = Array.prototype.slice.call(arguments, 1);
+		  
+		  return function() {
+		      return fn.apply(this, args.concat(
+		          Array.prototype.slice.call(arguments, 0)));
+		  };
+		};
+
+		var sequence = function(start, end) {
+		  var arr = [];
+		  
+		  for (var i = start; i <= end; i++) {
+		      arr.push(i);
+		  }
+		  
+		  return arr;
+		};
+
+		var seq5 = currier(sequence, 1);
+		var answer = seq5(5);
+
+		for (var i = 0; i < answer.length; i++ ) {
+			assert(answer[i] == [1, 2, 3, 4, 5][i], "Currying with " + i + " in Array works.");
+		}
+
+
+	</script>
+	
+</body>
+
+</html>
