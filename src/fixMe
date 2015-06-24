@@ -1,0 +1,53 @@
+Immediately Invoked Function Expression (IIFE)
+
+function fixMe() {
+  var numbers = [];
+  var i = 0;
+  
+  for (; i < 10; i++) {
+  	
+    numbers[i] = (function(i){return function () {
+      return i;
+    }})(i);
+
+  }
+
+  return numbers;
+}
+
+By passing i as an argument to IIFE, it becomes local to the function since i is no longer outside the function's scope and no longer just referenced. Thus, the state of whatever is being used is now locked in and insures that the function has its own copy of the index.
+
+var numbers = fixMe();
+var i = 0;
+
+Test.assertEquals(numbers.length, 10);
+
+for (; i < 10; i++) {
+  Test.assertEquals(numbers[i](), i);
+}
+
+for (i = 0; i < 10; i++) {
+  Test.assertEquals(numbers[i].toString().replace(/[ \t\n;]/g, ''), 'function(){returni}');
+}
+
+
+
+
+function fixMe() {
+  var numbers = [];
+  var i = 0;
+  
+  for (; i < 10; i++) {
+    
+    (function(i) {
+    
+      numbers[i] = function () {
+        return i;
+      };
+    
+    })(i);
+
+  }
+
+  return numbers;
+}
