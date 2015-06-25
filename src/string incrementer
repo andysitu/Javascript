@@ -1,0 +1,37 @@
+function incrementString (strng) {
+  // return incrementedString
+  var string = strng.replace(/[0-9]/g, '');
+  
+  var len = strng.length  - string.length;
+  
+  var str = strng.slice(string.length) || "0";
+  
+  str = (parseInt(str) + 1).toString();
+  
+  while (str.length < len) {
+    str = "0" + str;
+  }
+    
+    return string.concat(str);
+}
+
+
+Test.assertEquals(incrementString("foobar000"), "foobar001");
+Test.assertEquals(incrementString("foobar999"), "foobar1000");
+Test.assertEquals(incrementString("foobar00999"), "foobar01000");
+Test.assertEquals(incrementString("foo"), "foo1");
+Test.assertEquals(incrementString("foobar001"), "foobar002");
+Test.assertEquals(incrementString("foobar1"), "foobar2");
+Test.assertEquals(incrementString("1"), "2");
+Test.assertEquals(incrementString("009"), "010");
+
+
+
+
+function incrementString(input) {
+  if(isNaN(parseInt(input[input.length - 1]))) return input + '1';
+  return input.replace(/(0*)([0-9]+$)/, function(match, p1, p2) {
+    var up = parseInt(p2) + 1;
+    return up.toString().length > p2.length ? p1.slice(0, -1) + up : p1 + up;
+  });
+}
