@@ -1,0 +1,46 @@
+var fib = function (steps) {
+  if (!steps)
+    return 0;
+
+  var fibNum = [0, 1];
+  //Your code
+  
+  for (var i = 2; i < steps; i++) {
+    fibNum.push(fibNum[0] + fibNum[1]);
+    fibNum.shift();
+  }
+  
+  return fibNum[0] + fibNum[1];
+}
+
+var fib = function (steps) {
+  if (!steps)
+    return 0;
+
+  var fibNum = [0, 1];
+  //Your code
+  
+  for (var i = 2; i < steps + 1; i++) {
+    fibNum.push(fibNum[i-2] + fibNum[i-1]);
+  }
+  
+  return fibNum[steps]
+}
+
+
+
+var fib = (function() {
+  var cache = [0,1];
+  return function f(steps) {
+    var n = steps < cache.length ? cache[steps] : f(steps-1) + f(steps-2);
+    return cache[steps] = n, n;
+  }
+}());
+
+var fib = function (steps) {
+  var fibNum = [0, 1];
+  for( var i = 2; i < steps + 1; i++ ) {
+    fibNum.push( fibNum[i-2] + fibNum[i-1] );
+  }
+  return fibNum[steps];
+}

@@ -1,0 +1,46 @@
+function diamond(n){
+  if (!(n % 2) || (n < 0))
+    return null;
+    
+  var diam = '';
+    
+  function lineCreater(dia, n ) {
+    var counter = 1;
+    while (counter <= ((n-i)/2)) {
+      diam += ' ';
+      counter++;
+    }
+    counter = 1;
+    while (counter <= i) {
+      diam += "*";
+      counter++;
+    }
+    
+    diam += "\n";
+  }
+  
+  for (var i = 1; i <= n; i += 2){
+    lineCreater(i, n);
+  }
+  for (var i = n - 2; i >= 1; i -= 2) {
+    lineCreater(i, n);
+  }  
+  
+  return diam;
+}
+
+
+
+
+function diamond(n){
+  if( n%2==0 || n<1 ) return null
+  var x=0, add, diam = line(x,n);
+  while( (x+=2) < n ){
+    add = line(x/2,n-x);
+    diam = add+diam+add;
+  }
+  return diam;
+}//z.
+
+function repeat(str,x){return Array(x+1).join(str); }
+function line(spaces,stars){ return repeat(" ",spaces)+repeat("*",stars)+"\n"; }

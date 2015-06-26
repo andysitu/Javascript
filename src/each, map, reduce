@@ -1,0 +1,35 @@
+function each(list, callback) {
+	if (Array.isArray(list)) {
+		for (var i = 0; i < list.length; i++) {
+			callback(list[i]);
+		}
+	} else {
+		for (var key in list) {
+			callback(list[key]);
+		}
+	}
+}
+
+function map(list, callback) {
+	var arr = [];
+
+	each(list, function(value) {
+		arr.push(callback(value))
+	});
+
+	return arr;
+}
+
+
+// reduce(myArray, function(total, element) { return total + element }, 5); => 20
+
+function reduce(arr, callback, startValue) {
+	if (!startValue)
+		startValue = 0;
+
+	each(arr, function(value) {
+		startValue = callback(startValue, value);
+	})
+
+	return startValue;
+}

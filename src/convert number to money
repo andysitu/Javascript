@@ -1,0 +1,31 @@
+var numberToMoney = function(n) {
+  var match = /([0-9]*).([0-9]*)/.exec(n.toString());
+
+  function insertString(str, index, msg) {
+    return str.toString().slice(0, index) + msg + str.toString().slice(index);
+  }
+  
+  if (match[1].length > 3) {
+  var value = match[1].length % 3
+  
+  if (value)
+    match[1] = insertString(match[1], value, ",");
+  }
+
+  if (match[2][1] == 0) 
+    return match[1] + "." + match[2][0];
+  else if (match[2][1] == 0 && match[2][0] == 0)
+    return match[1]
+  else
+    return match[1] + "." + match[2][0] + match[2][1];
+};
+
+numberToMoney(10.2562)
+
+
+
+
+
+function numberToMoney(n) {
+  return String(Math.floor(n * 100) / 100).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}

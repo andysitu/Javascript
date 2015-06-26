@@ -1,0 +1,9 @@
+var find = function(string, array) {
+  if (array.indexOf(string) >= 0)
+    return true;
+   return false;
+}
+
+var find = function(string, array) {
+  return (array.indexOf(string) >= 0)
+}
