@@ -1,0 +1,41 @@
+function multiplyBy(x, y, n) {
+  // Code goes here...
+  var arr = [];
+  
+  for (var i = 0; i < n; i++) {
+    arr.push(x *= y);
+  }
+  
+  return arr; 
+};
+
+
+Array.prototype.mapper = function(callback) {  var arr = [];
+  for (var i = 0; i < this.length; i++)
+    this[i] =(callback(this[i]));
+};
+
+
+
+function multiplyBy(x, y, n) {
+  return arr = (Array.apply(null, Array(n))).mapper(
+      function() {return x *= y});
+  };
+
+
+
+
+
+
+
+function multiplyBy(x, y, n) {
+  return Array.apply(null, Array(n)).map(function() {
+    return x *= y;
+  });
+};
+
+function multiplyBy(x, y, n) {
+  var res = [];
+  while(n--) x *= y, res.push(x);
+  return res;
+}
