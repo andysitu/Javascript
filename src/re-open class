@@ -1,0 +1,8 @@
+String.prototype.myNewMethod = function() {
+  return this.toUpperCase();
+} 
+
+
+
+
+String.prototype.myNewMethod = String.prototype.toUppercase;

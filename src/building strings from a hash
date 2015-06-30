@@ -1,0 +1,15 @@
+function solution(pairs){
+  // TODO: complete
+  var arr = [];
+  for (var key in pairs) {
+    arr.push(key + " = " + pairs[key]);
+  }
+  
+  return arr.join(",");
+}
+
+
+
+function solution(pairs){
+  return Object.keys(pairs).map(function(value){return value + " = " + pairs[value];}).join(',');
+}

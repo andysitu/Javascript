@@ -1,0 +1,11 @@
+  for (var i = 0, count = 0; i < this.length; i++) {
+    if (this[i] == value)
+      count++;
+  }
+  
+  return count;
+}
+
+Array.prototype.numberOfOccurrences = function(num) {
+  return this.filter(function(value) { return value == num; }).length;
+}
