@@ -1,0 +1,3 @@
+function squareSum(numbers){  
+  return numbers.reduce(function(prev, curr) { return prev + curr * curr; }, 0);
+}

@@ -1,0 +1,54 @@
+function isValidWalk(walk) {
+  if (walk.length !== 10)
+    return false;
+  var dir = {
+    n:0,
+    s:0,
+    w:0,
+    e:0,
+  }
+  for (var i = 0; i < walk.length; i++) {
+    dir[walk[i]]++;
+  }
+  
+  if (dir["n"] !== dir["s"] || dir["w"] !== dir["e"])
+    return false;
+  else {
+    return true;
+  }
+}
+
+
+
+
+
+
+function isValidWalk(walk) {
+  var dx = 0
+  var dy = 0
+  var dt = walk.length
+  
+  for (var i = 0; i < walk.length; i++) {
+    switch (walk[i]) {
+      case 'n': dy--; break
+      case 's': dy++; break
+      case 'w': dx--; break
+      case 'e': dx++; break
+    }
+  }
+  
+  return dt === 10 && dx === 0 && dy === 0
+}
+
+
+function count(dir, walk) {
+  return walk.filter(function(d) {
+    return d == dir;
+  }).length;
+}
+
+function isValidWalk(walk) {
+  return walk.length === 10 &&
+  count('n', walk) == count('s', walk) &&
+  count('e', walk) == count('w', walk)
+}

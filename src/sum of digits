@@ -1,0 +1,34 @@
+function digital_root(n) {
+  n = n.toString();
+  var sum = 0;
+  for (var i = 0; i < n.length; i++) {
+    sum += Number(n[i]);
+  }
+  if (sum > 9) {
+    return digital_root(sum);
+  } else {
+    return sum;
+  }
+  }
+
+
+
+function digital_root(n) {
+  return (n-1) % 9 + 1;
+}
+
+
+function digital_root(n) {
+  if (n < 10) return n;
+
+  return digital_root(
+    n.toString().split("").reduce(function(a, b) { return a + b}, 0));
+}
+
+function digital_root(n) {
+  if (n < 10) return n;
+  
+  return digital_root(
+    // unary operator converts string d into a number.
+    n.toString().split('').reduce(function(acc, d) { return acc + +d; }, 0));
+}
