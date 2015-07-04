@@ -1,0 +1,42 @@
+function rot13(message){
+  var arr = [];
+ for (var i = 0; i < message.length; i++) {
+   arr.push((message.charCodeAt(i) -96 + 13) % 26 + 96);
+ }
+ return String.fromCharCode.apply(null, arr);
+}
+
+const char = "abcdecfghijklmnopqrstuvxyz";
+const char1 = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+
+const char = "abcdefghijklmnopqrstuvwxyz";
+const char1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function rot13(message){
+  message = message.replace(/[a-zA-Z]/g, function(match){
+    if (char.indexOf(match) >= 0)
+      return char[(char.indexOf(match) + 13) % 26 ];
+    else
+      return char1[(char1.indexOf(match) + 13) % 26];
+    });
+  return message;
+}
+
+
+
+
+
+var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXWZ";
+var cipher   = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXWZABCDEFGHIJKLM";
+
+function rot13(message){
+  return message.split('').map(function(c) {
+    var i = alphabet.indexOf(c);
+    if (i < 0) {
+      // not in alphabet, return char
+      return c;
+    }
+    
+    return cipher[i];
+  }).join('');
+}
