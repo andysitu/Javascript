@@ -1,0 +1,45 @@
+function count(array){
+  var obj = {};
+  
+  array.forEach(function(value, key) {
+    if (!obj[value]) {
+      obj[value] = 1;
+    } else {
+      obj[value] += 1;
+    }
+  });
+  
+  return obj;
+}
+
+
+function count(array){
+  var obj = {};
+  
+  array.forEach(function(value, key) {
+    obj[value] ? obj[value] += 1 : obj[value = 1];
+  });
+  
+  return obj;
+}
+
+
+
+
+
+
+
+
+function count(array){
+  return array.reduce(function (stack, value) {
+    return stack[value] ? stack[value]++ : stack[value] = 1, stack;
+  }, {});
+}
+
+function count(array){
+  res={};
+  for (var i=0;i<array.length;i++){
+    res[array[i]]=(res[array[i]]||0)+1;
+  }
+  return res;
+}

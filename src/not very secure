@@ -1,0 +1,11 @@
+function alphanumeric(string){
+  return (/^[\dA-Za-z]+$/g.test(string))
+}
+
+
+
+
+
+function alphanumeric(string){
+  return string.match(/^[A-Za-z0-9]+$/)!=null;
+}
