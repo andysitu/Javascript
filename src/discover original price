@@ -1,0 +1,12 @@
+function discoverOriginalPrice(discountedPrice, salePercentage){
+  var price = (discountedPrice * 100 /(100 - salePercentage));
+  return /\.00/.test(price.toFixed(2)) ? Number(price.toFixed(0)) : Number(price.toFixed(2));
+}
+
+
+
+
+
+function discoverOriginalPrice(discountedPrice, salePercentage){
+  return +(discountedPrice / (1 - salePercentage / 100)).toFixed(2);
+}

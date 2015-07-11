@@ -1,0 +1,90 @@
+function PrimeFactorizer(n){
+  this.n = n;
+  this.factor = this.init(this.n);
+}
+
+PrimeFactorizer.prototype.init = function(n) {
+  var obj = {},
+      div = 0;
+  
+  function isPrime(num) {
+    for (var i = 2; i < Math.sqrt(num); i++) {
+      if (num % i == 0) {
+        div = i;
+        return false;
+      }
+    }
+    return true
+  }
+  
+  (function primeFactor(n) {
+    if (isPrime(n)) {
+      obj[n] ? obj[n]++ : obj[n] = 1;
+    } else {
+      primeFactor(div);
+      primeFactor(n/div);
+    }
+  })(n);
+  
+  return obj;
+};
+
+//from
+
+function PrimeFactorizer(n){
+  this.n = n;
+  this.factor = this.init(this.n);
+}
+
+PrimeFactorizer.prototype.init = function(n) {
+  var obj = {};
+  
+  function isPrime(num) {
+    for (var i = 2; i < Math.sqrt(num); i++) {
+      if (num % i == 0) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+  
+  function findFactor(num) {
+    for (var i = 2; i < num; i++ ){
+      for (var j = num; j > i; j-- ){
+        if (j * i == num) {
+          return j;
+        }
+      }
+    }
+  }
+  
+  (function primeFactor(n) {
+    if (isPrime(n)) {
+      obj[n] ? obj[n]++ : obj[n] = 1;
+    } else {
+      var num1 = findFactor(n);
+      primeFactor(num1);
+      primeFactor(n/num1);
+    }
+  })(n);
+  
+  return obj;
+};
+
+
+
+
+
+
+
+
+function PrimeFactorizer(n) {
+  var i, factors = {};
+  for (i=2; i <= n; i++) {
+    while (n%i === 0) {
+      factors[i] = 1 + (factors[i]||0); n /= i;
+    }
+  }
+  return {factor:factors};
+}

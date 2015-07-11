@@ -1,0 +1,114 @@
+function TempTracker() {
+
+  var obj = {};
+  this.max = null;
+  this.min = null;
+  this.count = 0;
+  this.mean = null;
+  this.mode = null;
+  // var max, min, count = 0, mean = 0, mode;
+
+  this.insert = function(temperature) {
+  
+    obj[temperature] = (obj[temperature] || 0) + 1;
+    if (this.max == null && (temperature)) {
+      this.max = this.min = this.mode = this.mean = temperature;
+    }
+    if (temperature > this.max) {
+      this.max = temperature;
+    }
+    if (temperature < this.min) {
+      this.min = temperature;
+    }
+    if (obj[temperature] > obj[this.mode]) {
+      this.mode = temperature;
+    }
+    this.mean = this.mean * this.count;
+    this.count++;
+    this.mean = (this.mean + temperature) / this.count;
+  };
+  
+  this.getMax = function() {
+    return this.max;
+  };
+  
+  this.getMin = function() {
+    return this.min;
+  };
+  
+  this.getMean = function() {
+    return this.mean;
+  };
+  
+  this.getMode = function() {
+    return this.mode;
+  };
+}
+
+
+
+
+
+
+function TempTracker() {
+  
+  var sum, i = 0, c = {};
+  this.max = this.min = this.mode = null;
+  this.mc = 0;
+  
+  this.insert = function(t) {
+    this.max = Math.max(this.max || 0, t);
+    this.min = Math.min(this.min || 110, t);
+    (c[t] = (+c[t] || 0) + 1) > this.mc && (this.mode = t, this.mc = c[t]);
+    return sum = (sum || 0) + t, i++;
+  };
+  
+  this.getMean = function() { return sum / i || null };
+  
+  ['Max', 'Min', 'Mode'].forEach(function(m){
+    this['get' + m] = function(){ return this[m.toLowerCase()] }
+  }.bind(this));
+  
+}
+
+function TempTracker() {
+
+  var tempCounts = {},
+      maxTempCount = 0,
+      max = null,
+      min = null,
+      sum = null,
+      count = 0;
+
+  this.insert = function(temperature) {
+    if (count === 0) {
+      maxTempCount = sum = max = min = temperature;
+      tempCounts[temperature] = 1;
+      count = 1;
+    } else {
+      min = Math.min(min, temperature);
+      max = Math.max(max, temperature);
+      sum += temperature;
+      count++;
+      tempCounts[temperature] = (tempCounts[temperature]||0) + 1;
+      if (tempCounts[temperature] > tempCounts[maxTempCount])
+        maxTempCount = temperature;
+    }
+  };
+  
+  this.getMax = function() {
+    return max;
+  };
+  
+  this.getMin = function() {
+    return min;
+  };
+  
+  this.getMean = function() {
+    return count === 0 ? null : sum / count;
+  };
+  
+  this.getMode = function() {
+    return count === 0 ? null : maxTempCount;
+  };
+}
