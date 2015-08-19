@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+          var rectangle = new Path2D();
+          rectangle.rect(10, 10, 50, 50);
+
+          var circle = new Path2D();
+          circle.moveTo(125, 35);
+          circle.arc(100, 35, 25, 0, 2 * Math.PI);
+
+          ctx.stroke(rectangle);
+          ctx.fill(circle);
+  	  	}
+  	  }
+  	</script>
+</html>

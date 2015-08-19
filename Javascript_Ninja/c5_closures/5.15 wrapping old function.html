@@ -1,0 +1,54 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		function wrap(object, mmethod, wrapper) {
+			// Saves old method.
+			var fn = object[method];
+
+			// wraps original function by creating new function that calls on function
+			// passed as a wrapper. apply forces the context function to ojbect and
+			// passes as arguments the original method by using bind to force
+			// its function context to object of the old function and original arg.
+			return object[method] = function() {
+				return wrapper.apply(this, [fn.bind(this)].concat(
+					Array.prototype.slice.call(arguments)));
+			};
+		}
+
+		if (Prototype.Browser.Opera) {
+			wrap(Element.Methods, "readAttribute",
+				function(original, elem, attr) {
+					return attr == "title" ?
+						elem.title :
+						original(elem, attr);
+				});
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

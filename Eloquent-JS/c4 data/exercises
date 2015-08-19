@@ -1,0 +1,123 @@
+function range(start, end, interval) {
+	if (interval == undefined)
+		interval = 1;
+	var arr = [];
+
+	if (start < end && interval > 0)
+		for (var i = start; i <= end; i += interval)
+			arr.push(i);
+	else if (start > end && interval < 0)
+		for (var i = start; i >= end; i += interval)
+			arr.push(i);
+
+	return arr;
+}
+
+function sum(arr) {
+	var sum = 0;
+	for (var i = 0; i < arr.length; i++)
+		sum += arr[i];
+
+	return sum;
+}
+
+
+
+function reverseArray(arr) {
+	arr1 = [];
+
+	for (var i = 0; i < arr.length; i++)
+		arr1.unshift(arr[i]);
+
+	return arr1;
+}
+
+function reverseArrayInPlace(arr) {
+	arr1 = [];
+
+	for (var i = 0; i < arr.length; i++)
+		arr1.unshift(arr[i]);
+
+	for (var i = 0; i <arr1.length; i++)
+		arr[i] = arr1[i];
+}
+
+
+
+function arrayToList(arr) {
+	obj = {value: arr[arr.length -1], rest: null};
+
+
+	for (var i = arr.length - 2; i >= 0; i--) {
+		obj = {value: arr[i], rest: obj}
+	}
+
+	return obj;
+}
+
+function listToArray(list) {
+	arr = [];
+
+	for (var node = list; node; node = node.rest) {
+		arr.push(list.value);
+		list.value = list["rest"]["value"];
+		list.rest = list["rest"]["rest"];
+	}
+
+	arr.push(list.value);
+
+	return arr;
+}
+
+function listToArray(list) {
+	arr = [];
+
+	do {
+		arr.push(list.value);
+		list.value = list["rest"]["value"];
+		list.rest = list["rest"]["rest"];
+	} while (list["rest"] != null)
+
+	arr.push(list.value);
+
+	return arr;
+}
+
+function prepend(val, res) {
+	return {value: val, rest: res};
+}
+
+function nth(obj, end) {
+
+	if (end == 0) 
+		return obj["value"];
+	else {
+		obj.value = obj["rest"]["value"];
+		obj.rest = obj["rest"]["rest"];
+		end--;
+		return nth(obj, end);
+	}
+}
+
+function deepEqual(obj1, obj2) {
+ 
+  function dE() {
+  for (var key in obj1) {
+      if (typeof obj1[key] === "number" || typeof obj1[key] === "string" ||
+         typeof obj2[key] === "number" || typeof obj2[key] === "string") {
+        if (obj1[key] != obj2[key]) {
+          return false;
+        }
+      }
+      else {
+        return deepEqual(obj1[key], obj2[key]);
+	}
+    }
+  return 4;
+  }
+
+  if (dE() == false) {
+      return false;
+  } else
+	return true;
+}

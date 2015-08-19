@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+</head>
+
+<body>
+	<script type="text/javascript">
+		var ninja = {
+			chirp: function signal(n) {
+				return n > 1 ? signal(n-1) + "-chirp" : "chirp";
+			}
+		};
+
+		console.log(ninja.chirp(3));
+
+		var samurai = {
+			chirp: ninja.chirp
+		};
+
+		ninja = {};
+
+		console.log(samurai.chirp(3));
+	</script>	
+</body>
+
+</html>

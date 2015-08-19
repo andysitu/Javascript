@@ -1,0 +1,51 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<table><tbody></tbody></table>
+
+	<script type="text/javascript">
+
+		// Getelementsbytagname returns a list of elements, so [0] is required to refer to the first one.
+		var tbody = document.getElementsByTagName("tbody")[0];
+
+		for (var i = 0; i < 20000; i++) {
+
+			var tr = document.createElement("tr");
+
+			for (var t = 0; t < 6; t++) {
+				var td = document.createElement("td");
+				td.appendChild(document.createTextNode(i + "," + t));
+				tr.appendChild(td);
+			}
+
+			tbody.appendChild(tr);
+
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

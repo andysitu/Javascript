@@ -1,0 +1,76 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+	#box {	color:red;
+			position:relative;
+			}
+
+	</style>
+</head>
+
+<body>
+
+	<div id="box">Hello!</div>
+
+	<script type="text/javascript">
+
+	var timers = {
+		timerID: 0,
+		timers: [],
+
+		add: function(fn) {
+			this.timers.push(fn);
+		},
+
+		start: function() {
+			// Verifies there isn't a timer running
+			if (this.timerID) return;
+			(function runNext() {
+				// if there are any registered handlers, run through loop and execute each handler.
+				if(timers.timers.length > 0) {
+					for (var i = 0; i < timers.timers.length; i++) {
+						// if handler returns false, remove it from array of handlers(timers)
+						if (timers.timers[i]() === false) {
+							// removes the function
+							timers.timers.splice(i,1);
+							// lost an index number so have to go back
+							i--;
+						}
+					}
+					// runs runNext whihc runs the functions in if (timers.timers[i])())
+					// NOTE: timerID is the numerical ID of the timeout, which can be used later for clearTimeout. It's probably the number of each time setTimeout is run incrementing by 1.
+					timers.timerID = setTimeout(runNext, 0);
+					console.log(timers.timerID);
+				}
+			})();
+		},
+
+		stop: function() {
+			clearTimeout(this.timerID);
+			this.timerID = 0;
+		}
+	};
+
+	var box = document.getElementById("box"), x = 0, y = 20;
+
+	timers.add(function() {
+		box.style.left = x + "px";
+		if (++x > 50) return false;
+	});
+
+	timers.add(function() {
+		box.style.top = y + "px";
+		y += 2;
+		if (y > 120) return false;
+	});
+
+	timers.start();
+
+	</script>
+	
+</body>
+
+</html>

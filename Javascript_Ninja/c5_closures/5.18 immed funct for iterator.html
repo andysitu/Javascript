@@ -1,0 +1,26 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+	</style>
+</head>
+
+<body>
+	<div>Div 0</div>
+	<div>Div 1</div>
+
+	<script type="text/javascript">
+		var divs = document.getElementsByTagName("div");
+
+		for (var i = 0; i < divs.length; i++) (function(n){
+			divs[n].addEventListener("click", function() {
+				alert("divs #" + n + "was clicked.");
+			}, false);
+		})(i);
+	</script>
+	
+</body>
+
+</html>

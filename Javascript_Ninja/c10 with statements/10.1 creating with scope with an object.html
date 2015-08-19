@@ -1,0 +1,55 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+
+		var use = "other";
+
+		var katana = {
+			isSharp: true,
+			use: function() {
+				this.isSharp = ! this.isSharp;
+			}
+		}
+
+		with (katana) {
+
+			assert(use !== "other" && typeof use == "function",
+				"use is a function from the katana object.");
+			assert(this !== katana,
+				"context isn't changed; keeps its original value.");
+
+		}
+
+		assert(use === "other",
+			"outside the with use is unaffected.");
+		assert(typeof isSharp === "undefined",
+			"outside the with the properties don't exist.");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

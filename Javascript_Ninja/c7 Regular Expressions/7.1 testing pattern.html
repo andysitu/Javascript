@@ -1,0 +1,58 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		function isThisAZipCode(candidate) {
+			if (typeof candidate !== "string" ||
+				candidate.length != 10) return false;
+			for (var n = 0; n < candidate.length; n++) {
+				var c = candidate[n];
+				switch (n) {
+					case 0: case 1: case 3: case 4:
+					case 6: case 7: case 8: case 9:
+						if (c < '0' || c > '9') return false;
+						break;
+					case 5:
+						if (c != '-') return false;
+						break;
+				}
+			}
+			return true;
+		}
+
+		function regExpZip(candidate) {
+			return /^\d{5}-\d{4}$/.test(candidate);
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+			assert(isThisAZipCode("90024-1100") == true,
+				"isthiszipecode working");
+			assert(regExpZip("90024-1100") == true,
+				"Also the reg exp funct version is working.");
+		};
+	</script>
+	
+</body>
+
+</html>

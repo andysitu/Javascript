@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+	</style>
+
+</head>
+
+<body>
+	<script type="text/javascript">
+
+		function fixEvent(event) {
+			function returnTrue() { return true; }
+			function returnFalse() { return false; }
+
+			if (!event || !event.stopPropagation) {
+				var old = event || window.event;
+
+				event = {};
+
+				for (var prop in old) {
+					event[prop] = old[prop];
+				}
+
+				if (!event.target) {
+					// event.srcElement in Internet Explorer to determine event's target element
+					// event.target in most other browsers
+					event.target = event.srcElement || document;
+				}
+
+
+				// handle which other element the event is related to
+				event.relatedTarget = event.fromElement === event.target ?
+					// event from where the element is going to or from where it left.
+					event.toElement :
+					event.fromElement;
+
+				// stops the default brwoser action
+				event.preventDault = function() {
+					event.returnValue = false;
+					event.isDefaultPrevented = returnTrue;
+				};
+
+				event.isDefaultPrevented = returnFalse;
+
+				// stop the event from bubbling
+				// after an event triggers on the deepest possible element, it then triggers on parents in nesting order
+				event.stopPropagation = funtion() {
+					event.cancelBubble = true;
+					event.isPropagationStopped = returnTrue;
+				};
+
+				event.isPropagationStopped = returnFalse;
+
+				// stop th event from bubbling and executing the handlers
+				event.stopImmediatePropagation = function() {
+					this.isImmediatePropagationStopped = returnTrue;
+					this.stopPropagation();
+				};
+
+				event.isImmediatePropagationStopped = returnFalse;
+
+
+				if (event.clientX != null) {
+					var doc = document.documentElemtn, body = document.body;
+
+					event.pageX = event.clientX +
+						( doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+						(doc && doc.clientLeft || body && body.clientLeft || 0);
+					event.pageY = event.clientY + 
+						(doc && doc.scrollTop || body && body.scrollTop || 0) -
+						(doc && doc.clientTop || body && body.clientTop || 0);
+				}
+
+				// Handle key presses
+				event.which = event.charCode || event.keyCode;
+
+				// identifies the mouse button clicked by user on a mouse event
+				if (event.button != null) {
+					event.button = (event.button & 1 ? 0 :
+						(event.button & 4 ? 1: 
+							(event.button & 2 ? 2 : 0)));
+				}
+			}
+
+			return event;
+		}
+
+	</script>	
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+
+		var re1 = /test/i;
+
+		var re2 = new RegExp("test", "i");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+			assert(re1.toString() == "/test/i",
+				"Verif the contents of the expression.");
+			assert(re1.test("TesT"), "It's case-insensitive.");
+			assert(re2.test("TesT"), "This one is, too.");
+			assert(re1.toString() == re2.toString(),
+				"The regular exprsesion are equal.");
+			assert(re1 != re2, "But they are different objects.");
+			assert(re1 == re1, "But re1 is the same as itself.");
+			assert( /test/i.test("test"), "Does this work?");
+		};
+	</script>
+	
+</body>
+
+</html>

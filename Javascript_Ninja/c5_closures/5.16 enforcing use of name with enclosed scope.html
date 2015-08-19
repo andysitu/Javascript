@@ -1,0 +1,29 @@
+<html>
+
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+	<title>Test Suite</title>
+
+	<style>
+	</style>
+</head>
+
+<body>
+	<img src='miss.png'>
+
+	<script type="text/javascript">
+		$ = function(){alert('not jQuery'); };
+
+		// $ is passed as an argument so $ in the function becomes whatever is passed
+		// which is jQuery as it is run as an immediate function.
+		(function($) {
+			$('img').on('click', function(event) {
+				$(event.target).addClass('clickedOn');
+			})
+		})(jQuery);
+	</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<div class="samurai ninja"></div>
+	<div class ="ninja samurai"></div>
+	<div></div>
+	<span class="samurai ninja ronin"></span>
+
+	<script>
+		function findClassInElements(className, type) {
+
+			var elems =
+				document.getElementsByTagName(type || "*");
+
+			var regex = 
+				// constructing an instane of RegExp object converts this to a string
+				// this means that regex is equivalent to /(^|\s)ninja(\s|$)/ since this is in strings
+				new RegExp("(^|\\s)" + className + "(\\s|$)");
+				// regex literal wouldn't work because the className isn't known yet
+
+			console.log(regex);
+
+			var results = [];
+
+			for (var i = 0, length = elems.length; i < length; i++)
+				if (regex.test(elems[i].className)) {
+					results.push(elems[i]);
+				}
+			return results;
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+			assert(findClassInElements("ninja", "div").length == 2,
+				"The right aount of div ninjas was found.");
+			assert(findClassInElements("ninja", "span").length == 1,
+				"The right amount of span ninjas was found.");
+			assert(findClassInElements("ninja").length == 3,
+				"The right amount of ninjas was found.");
+		};
+	</script>
+	
+</body>
+
+</html>

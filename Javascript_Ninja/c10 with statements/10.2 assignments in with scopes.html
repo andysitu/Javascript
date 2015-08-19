@@ -1,0 +1,57 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+
+		var katana = {
+			isSharp: true,
+			use: function() {
+				this.isSharp = !this.isSharp;
+			}
+		};
+
+		with (katana) {
+			isSharp = false;
+
+			assert(katana.isSharp === false,
+				"properties can be assigned.");
+
+			// unreferenced assignments that are not to an existing property 
+			// within the with scope's are made to the global context.
+			cut = function() {
+				isSharp = false;
+			};
+		}
+
+		assert(typeof katana.cut == "function",
+			"new properties can be created on the scoped object.");
+		assert(typeof window.cut == "function",
+			"new properties are created in the global scope.");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

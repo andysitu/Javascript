@@ -1,0 +1,39 @@
+function min (num1, num2) {
+	if (num1 > num2)
+		return num2;
+	else
+		return num1;
+}
+
+function isEven(num) {
+	if (num < 0)
+		return false;
+	else if (num == 0)
+		return true;
+	else if (num == 1)
+		return false;
+	else if (num > 0)
+		return isEven(num -2);
+}
+
+function countBs(word) {
+	var count = 0;
+
+	for (var i = 0; i < word.length; i++) {
+		if (word.charAt(i) == "B")
+			count++;
+	}
+
+	return count;
+}
+
+function countChar(word, letter) {
+	var count = 0;
+
+	for (var i = 0; i < word.length; i++) {
+		if (word.charAt(i) == letter)
+			count++;
+	}
+
+	return count;
+}

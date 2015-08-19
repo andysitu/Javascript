@@ -1,0 +1,93 @@
+
+<html>
+	<head>
+		<title>Test Suite</title>
+		<script>
+			(function() {
+				var queue = [], paused = false, results;
+				this.test = function(name, fn) {
+					// pushes function to the queue array
+					queue.push(function(){
+						results = document.getElementById("results");
+						results = assert(true, name).appendChild(
+							document.createElement("ul"));
+						fn();
+					});
+					runTest();
+				};
+				this.pause = function() {
+					paused = true;
+				};
+				this.resume = function() {
+					paused = false;
+					// setTimeout(function,milliseconds, param1, paramm2)
+					// Is a window method
+					// After a millisecond, it runs runTest function
+					setTimeout(runTest, 1);
+				};
+				function runTest() {
+					if(!paused && queue.length) {
+						// First it runs shift and then it runs the function inside it
+						queue.shift()();
+						// This seems to do nothing since taking it out since has it run as before and console.log never runs
+						if (!paused) {
+							resume();
+						}
+					}
+				}
+
+				this.assert = function(value, desc) {
+					var li = document.createElement("li");
+					li.className = value ? "pass" : "fail";
+					li.appendChild(document.createTextNode(desc));
+					results.appendChild(li);
+					if (!value) {
+						li.parentNode.parentNode.className = "fail";
+					}
+					return li;
+				};
+			})();
+
+// The function runs by running tests which loads "async test #1" and the function into queue.
+// Then, runTest() whihch does shift() and runs the function that was just shifted()
+// This sets up <li> under <ul results> and a <ul> under the <li>
+// and it runs the fn() which pauses() and then sets a timeout function after 10 seconds,
+// but during this period, it is still paused so even though the next test with Async is being run
+// that function adds to queue but then dies out since paused is true and so the if case in
+// runTest isn't true. But, when setTimeout is finally run again, this sets up the next bullet point 
+// from assert and then it runs resume which sets paused to false and then runsTest which does
+// queue.shift()() and runs the last queue function which is set to a timeout.
+			window.onload = function() {
+				test("Async Test #1", function() {
+					pause();
+					setTimeout(function() {
+						assert(true, "First test completed");
+						resume();
+					}, 1000)
+				});
+				test("Async Test #2", function() {
+					pause();
+					setTimeout(function() {
+						assert(true, "Second test completed");
+						resume();
+					}, 1000);
+				});
+			};
+		</script>
+
+		<style>
+			#results li.pass {
+				color: green;
+			}
+
+			#results li.fail {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>
+

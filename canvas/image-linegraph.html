@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+  	  		var img = new Image();
+          img.onload = function() {
+            ctx.drawImage(img,0,0);
+            ctx.beginPath();
+            ctx.moveTo(30,96);
+            ctx.lineTo(70,66);
+            ctx.lineTo(103,76);
+            ctx.lineTo(170,15);
+            ctx.stroke();
+          }
+          img.src = 'https://mdn.mozillademos.org/files/5395/backdrop.png';
+  	  	}
+  	  }
+  	</script>
+</html>

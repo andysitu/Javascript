@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+  	  		var img = new Image();
+          img.onload = function() {
+            for (var i = 0; i<4; i++) {
+              for (var j = 0; j<3; j++) {
+                ctx.drawImage(img,j*50,i*38,50,38);
+              }
+            }
+          }
+          img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+  	  	}
+  	  }
+  	</script>
+</html>

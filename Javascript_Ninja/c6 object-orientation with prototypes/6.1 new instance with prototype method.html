@@ -1,0 +1,51 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		// normal function
+		function Ninja(){}
+
+		// add method to Ninja's prototype
+		Ninja.prototype.swingSword = function() {
+			return true;
+		};
+
+		var ninja1 = Ninja();
+		assert(ninja1 === undefined,
+			"No instance of Ninja created");
+
+		// call on funcition as constructor
+		// function is called but a newly allocated object has been created and set as the context of the function. The result return from a new operator is a reference to this new object.
+		var ninja2 = new Ninja();
+		assert(	ninja2 &&
+				ninja2.swingSword &&
+				ninja2.swingSword(),
+				"Instance exists and method is callable");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

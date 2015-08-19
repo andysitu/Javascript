@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+    <div style="display:none;">
+     <img id="source" src="https://mdn.mozillademos.org/files/5397/rhino.jpg" width="300" height="227">
+     <img id="frame" src="https://mdn.mozillademos.org/files/242/Canvas_picture_frame.png" width="132" height="150">
+   </div>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+          ctx.fillRect(0,0,400,400);
+          ctx.drawImage(document.getElementById("source"), 33, 71, 104, 124, 21, 20, 87, 104);
+
+          ctx.drawImage(document.getElementById('frame'),0,0);
+
+
+  	  	}
+  	  }
+  	</script>
+</html>

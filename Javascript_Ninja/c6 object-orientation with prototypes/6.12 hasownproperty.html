@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		Object.prototype.keys = function() {
+			var keys = [];
+			for (var i in this)
+				if (this.hasOwnProperty(i)) keys.push(i);
+			return keys;
+		};
+
+		var obj = {a: 1, b: 2, c: 3};
+
+		assert(obj.keys().length == 3, 
+			"There are three properties in this object.");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

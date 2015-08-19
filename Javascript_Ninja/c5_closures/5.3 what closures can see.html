@@ -1,0 +1,54 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+		var outerValue = 'ninja';
+		var later;
+
+		function outerFunction() {
+			var innerValue = 'samurai';
+
+			function innherFunction(paramValue) {
+				assert(outerValue, "inner can see the ninja.");
+				assert(innerValue, "Inner can see the samura.");
+				assert(paramValue, "Inner can see the wakizashi.");
+				assert(tooLate, "Inner can see the ronin.");
+			}
+
+			later = innherFunction;
+		}
+
+		assert(!tooLate, "Outer can't see the ronin.");
+
+		var tooLate = 'ronin';
+
+		outerFunction();
+		later('wakizashi');
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+	</style>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+
+		// at least 10ms delay after previous callback. maybe more, but never less
+		setTimeout(function repeatMe() {
+			/* some code */
+			setTimeout(repeatMe, 10);
+		}, 10);
+
+		// attempt a callback every 10ms regardless when last one was called.
+		// thus back to back with no delay may occur. But multiple instances of the same interval handler will never be queued up.
+		setInterval(function() {
+			/* ... */
+
+		}, 10)
+
+	</script>
+	
+</body>
+
+</html>

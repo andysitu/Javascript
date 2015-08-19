@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+  	  		var ftriang = new Path2D();
+          ftriang.moveTo(25, 25);
+          ftriang.lineTo(105, 25);
+          ftriang.lineTo(25, 105);
+          ctx.fill(ftriang);
+
+          var striang = new Path2D();
+          striang.moveTo(125, 125);
+          striang.lineTo(125, 45);
+          striang.lineTo(45, 125);
+          striang.closePath();
+          ctx.stroke(striang);
+  	  	}
+  	  }
+  	</script>
+</html>
+

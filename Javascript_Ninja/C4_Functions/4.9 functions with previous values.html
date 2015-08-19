@@ -1,0 +1,51 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+		function isPrime(value) {
+			if (!isPrime.answers) isPrime.answers = {};
+			if (isPrime.answers[value] != null) {
+				return isPrime.answers[value];
+			}
+			var prime = value != 1; // 1 can't be a prime
+			for (var i = 2; i < value; i++) {
+				if (value % i == 0) {
+					prime = false;
+					break;
+				}
+			}
+			return isPrime.answers[value] = prime;
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.setTimeout(function() {
+			assert(isPrime(5), "5 is prime!");
+			assert(isPrime.answers[5], "The answer was cached!");
+		}, 40);
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

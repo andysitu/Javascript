@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+		function smallest(array) {
+			return Math.min.apply(Math, array);
+		}
+
+		function largest(array) {
+			return Math.max.apply(Math, array);
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+			assert(smallest([0, 1, 2, 3]) == 0,
+				"Located the smallest value");
+			assert(largest([0, 1, 2, 3,]) == 3,
+				"Located the largest value.");
+		};
+	</script>
+	
+</body>
+
+</html>

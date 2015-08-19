@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+          var lineJoin = ['round', 'bevel', 'mitter'];
+
+          ctx.lineWidth = 10;
+
+          for (var i = 0, len = lineJoin.length; i < len; i++) {
+            ctx.lineJoin = lineJoin[i];
+            ctx.beginPath();
+            ctx.moveTo(-5,5+i*40);
+            ctx.lineTo(35,45+i*40);
+            ctx.lineTo(75,5+i*40);
+            ctx.lineTo(115,45+i*40);
+            ctx.lineTo(155,5+i*40);
+            ctx.stroke();
+          }
+  	  	}
+  	  }
+  	</script>
+</html>

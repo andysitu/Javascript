@@ -1,0 +1,48 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+	<a href="listing-12.5.html" id="testSubject">Self</a>
+
+	<script type="text/javascript">
+		var link = document.getElementById('testSubject');
+
+		var linkHref = link.getAttributeNode('href').nodeValue;
+
+		assert(linkHref === 'listing-12.5.html',
+			"link node value is okay");
+
+		assert(link.href === 'listing-12.5.html',
+			"link property value is okay." + link.href);
+
+		assert(link.getAttribute("href") === linkHref,
+			"link attribute not modified.");
+	</script>
+</body>
+
+</html>

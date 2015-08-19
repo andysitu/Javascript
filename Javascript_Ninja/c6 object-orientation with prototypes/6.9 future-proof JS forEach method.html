@@ -1,0 +1,47 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		if (!Array.prototype.forEach) {	
+
+			Array.prototype.forEach = function (callback, context) {
+				for (var i = 0; i < this.length; i++) {
+					callback.call(context || null, this[i], i, this);
+				}
+			};
+		}
+
+		["a", "b", "c"].forEach(function(value, index, array) {
+			assert(value, 
+				"Is in position " + index + " out of " +
+				(array.length -1));
+		});
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

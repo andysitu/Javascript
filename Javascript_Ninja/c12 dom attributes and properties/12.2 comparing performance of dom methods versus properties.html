@@ -1,0 +1,74 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<div id="testSubject"></div>
+
+	<script>
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+
+	<script type="text/javascript">
+
+		var count = 5000000, n, end;
+		var begin = new Date();
+		var testSubject = document.getElementById("testSubject");
+		var value;
+
+		for (n = 0; n < count; n++) {
+			value = testSubject.getAttribute('id');
+		}
+
+		end = new Date();
+		assert(true, 'Time for DOM read: ' + 
+			(end.getTime() - begin.getTime()));
+
+		begin = new Date();
+		for (n = 0; n < count; n++) {
+			value = testSubject.id;
+		}
+		end = new Date();
+		assert(true, "Time for property read: " +
+			(end.getTime() - begin.getTime()));
+
+		begin = new Date();
+		for (n = 0; n < count; n++) {
+			testSubject.setAttribute('id', 'testSubject');
+		}
+		end = new Date();
+		assert(true, 'Time for DOM method write: ' +
+			(end.getTime() - begin.getTime()));
+
+		begin = new Date();
+		for (n = 0; n < count; n++) {
+			testSubject.id = "testSubject";
+		}
+		end = new Date();
+		assert(true, "Time for property write: " + 
+			(end.getTime() - begin.getTime()));
+
+	</script>
+	
+</body>
+
+</html>

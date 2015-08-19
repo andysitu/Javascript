@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+  	  		ctx.fillStyle = '#FD0';
+          ctx.fillRect(0,0,75,75);
+          ctx.fillStyle = '#6C0';
+          ctx.fillRect(75,0,75,75);
+          ctx.fillStyle = '#09F';
+          ctx.fillRect(0,75,75,75);
+          ctx.fillStyle = '#F30';
+          ctx.fillRect(75,75,75,75);
+          ctx.fillStyle = '#FFF';
+
+          ctx.globalAlpha = 0.2;
+
+          for (var i = 0; i<7; i++) {
+            ctx.beginPath();
+            ctx.arc(75,75, 10 +10*i, 0, Math.PI * 2, true);
+            ctx.fill();
+          }
+  	  	}
+  	  }
+  	</script>
+</html>

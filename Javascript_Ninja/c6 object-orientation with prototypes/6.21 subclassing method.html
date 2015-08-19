@@ -1,0 +1,92 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		(function() {
+			var initializing = false, 
+				// Tests is serialization works with text xyz in function and tests 
+				// with reg expression /xyz/.
+				superPattern =
+				/xyz/.test(function() {xyz;}) ? /\b_super\b/ : /.*/;
+
+			// properties is an array of properties
+			Object.subClass = function(properties) {
+				// this refers to Object or the superClass
+				var _super = this.prototype;
+
+				initializing = true;
+				// Creates an instance of the superclass to use as a prototype
+				// (this is Object taht subClass function is attached)
+
+				// proto will be set later as the prototype. It contains all of the methods and properties
+				var proto = new this();
+				initializing = false;
+
+				for (var name in properties) {
+
+					// Gives properties/ methods to the prototype.
+					proto[name] = typeof properties[name] == "function" &&
+								typeof _super[name] == "function" &&
+								// Does the subclass function have the same name 
+								// as the _super (the superClass)
+								superPattern.test(properties[name]) ?
+						(function(name, fn) {
+							return function() {
+								var tmp = this._super;
+
+								this._super = _super[name];
+
+								var ret = fn.apply(this, arguments);
+								this._super = tmp;
+
+								return ret;
+							};
+						})(name,properties[name]) :
+						properties[name];
+				}
+
+				function Class() {
+					// All construction is actuall done in the init method
+					if (!initializing && this.init)
+						this.init.apply(this, arguments);
+				}
+
+				// the prototype property is set here.s
+				Class.prototype = proto;
+
+				Class.constructor = Class;
+
+				Class.subClass = arguments.callee;
+
+				return Class;
+			}
+		})();
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

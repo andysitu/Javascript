@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Test Suite</title>
+
+		<script>
+
+			function assert(value, desc) {
+				var li = document.createElement("li");
+				li.className = value ? "pass" : "fail";
+				li.appendChild(document.createTextNode(desc));
+				document.getElementById("results").appendChild(li);
+			}
+
+// assert runs based on DOM, so this means that everything has to load first before
+// appendchild refers to an actual location.
+
+			function loader() {
+	  			assert(typeof window.isNimble === "function", "isNimble() defined");
+	  			assert(isNimble.name === "isNimble", "isNimble() has a name");
+	  			assert(typeof window.canFly === "function", "canFly() defined");
+	  			assert(canFly.name === "", "canFly() has no name");
+	  			assert(typeof window.isDeadly === "function", "isDeadly() defined");
+	  			outer();
+	  			assert(window.inner === undefined, "inner() still not in global scope");
+	  			assert(window.wieldSword.name = "swingSword", "wieldSword's real name is swingSword");
+			}
+
+// 			setTimeout(loader, 100);
+			window.onload=loader;
+
+
+			function isNimble(){return true;}
+
+			var canFly = function(){return true;};
+
+			window.isDeadly = function() {return true;};
+
+			function outer(){
+				assert(typeof inner === "function", "inner() in scope before declaration");
+				function inner(){}
+				assert(typeof inner === "function", "inner() in scope after declaration");
+				assert(window.inner === undefined, "inner() is not in global scope");	
+			}
+
+			window.wieldSword = function swingSword(){return true;};
+
+		</script>
+
+		<style>
+			#results li.pass { color: green;}
+			#results li.fail { color: red; }
+		</style>
+	</head>
+
+	<body>
+		<ul id="results"></ul>
+	</body>
+
+</html>

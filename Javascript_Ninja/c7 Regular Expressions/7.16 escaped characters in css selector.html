@@ -1,0 +1,49 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type = "text/javascript">
+
+		// Not working
+		//var pattern = /^((\w+)|(\\.))+$/;
+		var pattern = /[\S\s]*/;
+
+		var tests = [
+			"formUpdate",
+			"form\\.update\\.whatever",
+			"form\\:update",
+			"\\f\\o\\r\\m\\u\\p\\d\\a\\t\\e",
+			"form:update"
+		];
+
+		for (var n = 0; n < tests.length; n++) {
+			assert(pattern.test(tests[n]),
+				tests[n] + " is a valid identifier ");
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

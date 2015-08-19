@@ -1,0 +1,49 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		function User(first, last) {
+			if (!(this instanceof arguments.callee)) {
+				return new User(first, last);
+			}
+			this.name = first + " " + last;
+		}
+
+		var name = "Rukia";
+
+		var user = User("Ichigo", "Kurosaki");
+
+		console.log(user);
+
+		assert(name == "Rukia", "Name was set to Rukia");
+		assert(user instanceof User, "User instantiated");
+		assert(user.name == "Ichigo Kurosaki", 
+			"User name correctly assigned");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

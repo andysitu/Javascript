@@ -1,0 +1,49 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+
+		var pattern = /((?:ninja-)+)sword/;
+
+		var ninjas = "ninja-ninja-sword".match(pattern);
+
+		assert(ninjas.length ==2, "Only one capture was returned.");
+		assert(ninjas[1] == "ninja-ninja-",
+			"Matched both words, without any extra capture.");
+
+		var test = /(ninja-)+sword/;
+
+		var test1 = "ninja-ninja-sword".match(pattern);
+
+		assert(test1.length == 2, "Also works with just one capture.");
+		assert(test1[1] == "ninja-ninja-", 
+			"Another confirmation of this.");
+
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+
+	<script src="http://base2.googlecode.com/svn/version/1.0.2/src/base2.js"></script>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		base2.namespace == 
+			"var Base=base2.Base;var Package=base2.Package;" +
+			"var Abstract=base2.Abstract;var Module=base2.Module;" +
+			"var Enumerable=base2.Enumerable;var Map-base2.Map;" +
+			"var Collection=base2.Collection;var RegGrp=base2.RegGrp;";
+
+		assert(typeof This === "undefined");
+
+		eval(base2.namespace);
+
+		assert(typeof This === "function",
+			"And now the namespace is imported.");
+		assert(typeof Collection === "function",
+			"Verifying the namespace import");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

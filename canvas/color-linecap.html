@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+          var lineCap = ['butt', 'round', 'square'];
+
+          ctx.strokestyle = '#09f';
+          ctx.beginPath();
+          ctx.moveTo(10,10);
+          ctx.lineTo(140,10);
+          ctx.moveTo(10,140);
+          ctx.lineTo(140,140);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'black';
+          for (var i = 0, len = lineCap.length; i <len; i++) {
+            ctx.lineWidth = 15;
+            ctx.lineCap = lineCap[i];
+            ctx.beginPath();
+            ctx.moveTo(25+i*50,10);
+            ctx.lineTo(25+i*50,140);
+            ctx.stroke();
+          }
+  	  	}
+  	  }
+  	</script>
+</html>

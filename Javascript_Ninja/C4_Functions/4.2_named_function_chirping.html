@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+	</head>
+
+	<body>
+		<ul id="results"></ul>
+
+	<script type="text/javascript">
+		function chirp(n) {
+			return n > 1 ? chirp(n-1) + "-chirp" : "chirp";
+		}
+
+			console.log("HI");
+	function assert(value, desc) {
+		var li = document.createElement("li");
+		li.className = value ? "pass" : "fail";
+		li.appendChild(document.createTextNode(desc));
+		document.getElementById("results").appendChild(li);
+	}
+
+	window.onload = function() {
+		assert(true, "The test suite is running");
+		assert(chirp(3) == "chirp-chirp-chirp",
+			"Calling the named function gives three chirps");
+	};
+	</script>
+		
+	</body>
+</html>

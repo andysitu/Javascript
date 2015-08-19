@@ -1,0 +1,61 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+		Function.prototype.memoized = function(key) {
+			// Check if it exists, if not then this._values is created
+			this._values = this._values || {};
+			// In one statement, calculates this._values if it doesn't exists 
+			// then the function is run through apply. if it does, then
+			// it uses memoization
+			return this._values[key] !== undefined ?
+				this._values[key] :
+				this._values[key] = this.apply(this, arguments);
+		};
+
+		// Uses prime function from before
+		function isPrime(num) {
+			var prime = num != 1;
+			for (var i =2; i < num; i++) {
+				if (num % i == 0 ) {
+					prime = false;
+					break;
+				}
+			}
+			return prime;
+		}
+
+		// Requires memoized method each time.
+		assert(isPrime.memoized(5), 
+			"The function works; 5 is prime.");
+
+		assert(isPrime._values[5], 
+			"The answer has been cached.");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

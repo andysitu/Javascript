@@ -1,0 +1,69 @@
+var arrays = [[1, 2, 3], [4, 5], [6]];
+var arr = arrays.reduce(function(a, b) {
+  return a.concat(b)
+console.log(arr);
+
+
+
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+var byName = {};
+ancestry.forEach(function(person) {
+  byName[person.name] = person;
+});
+
+// Your code here.
+var arr = [];
+var mom = "";
+for (var key in byName) {
+  if ((mom = byName[key]["mother"]) && byName[mom]) {
+    arr.push(byName[key]["born"] - byName[mom]["born"]);
+  }
+}
+
+var ages = average(arr);
+
+
+
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+var obj = {};
+ancestry.forEach(function(person) {
+	obj[person.name] = person
+});
+
+var ages = {}, century;
+for (var key in obj){
+  century = Math.ceil(obj[key]["died"] / 100);
+  if (ages[century]) {
+    ages[century].push(obj[key]["died"] - obj[key]["born"]);
+  } else {
+  	ages[century] = [obj[key]["died"] - obj[key]["born"]]; 
+  }
+}
+
+for (var key in ages) {
+  console.log(key + ": " + average(ages[key]));
+}
+
+
+
+function every(arr, want) {
+ for (var i = 0; i < arr.length; i++)
+   if (!want(arr[i]))
+     return false;
+  return true;
+}
+
+function some(arr, want) {
+  for (var i = 0; i < arr.length; i++) 
+    if (want(arr[i]))
+      return true;
+  return false;
+}

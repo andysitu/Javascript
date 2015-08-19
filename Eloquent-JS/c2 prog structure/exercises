@@ -1,0 +1,43 @@
+Looping a triangle:
+
+	var str = "";
+	do {console.log(str = str + "#")} while (str.length <= 7);
+
+
+FizzBuzz
+
+	for (var i = 0; i < 101; i++) {
+	  if (i % 3 == 0) {
+	    if (i % 5 == 0) 
+	      console.log("FizzBuzz");
+	      console.log("Fizz");
+	  }
+	  else if (i % 5 == 0) 
+	    console.log("Buzz");
+	  else console.log(i);
+	}
+
+
+Chess Board
+	
+	var size = 8;
+	var str = '';
+
+	for (var i = 0; i < size; i++) {
+	  for (var j = 0; j < size; j++) {
+	    if (i % 2 == 0) {
+	      if (j % 2 == 0)
+	        str = str + ' ';
+	      else
+	        str = str + '#';
+	   	 } else {
+	      if (j %2 == 0)
+	        str = str + '#';
+	      else
+	        str = str + ' ';
+	    } 
+	  }
+	  str = str + "\n";
+	}
+	    
+	console.log(str);

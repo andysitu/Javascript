@@ -1,0 +1,50 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+
+		assert(eval("5+5") === 10,
+			"5 and 5 is 10");
+
+		assert(eval("var ninja = 5;") === undefined,
+			"No value was returned.");
+		assert(ninja === 5, "The variable ninja was created");
+
+		(function(){
+			eval("var ninja = 6;");
+			assert(ninja === 6,
+				"evaluated within the current scope.");
+		})();
+
+		assert(window.ninja === 5,
+			"the global scope was unaffected from the previous function.");
+		assert(ninja === 5,
+			"the global scope was unaffected.");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

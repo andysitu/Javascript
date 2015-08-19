@@ -1,0 +1,55 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		function globalEval(data) {
+			data = data.replace(/^\s*|\s*$/g, "");
+
+			if (data) {
+				var head = document.getElementsByTagName("head")[0] ||
+						document.documentElement,
+					script = document.createElement("script");
+
+				script.type = "text/javascript";
+				script.text = data;
+
+				// attaching it to the DOM as a child of the head element causes the script to be evaluated in the global scope.
+				head.appendChild(script);
+				head.removeChild(script);
+			}
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+
+			(function() {
+				globalEval("var test = 5;");
+			})();
+
+			assert(test === 5, "The code was evaluated globally.");
+		};
+	</script>
+	
+</body>
+
+</html>

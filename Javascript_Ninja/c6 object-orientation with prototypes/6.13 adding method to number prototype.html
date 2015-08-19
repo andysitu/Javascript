@@ -1,0 +1,45 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script type="text/javascript">
+		Number.prototype.add = function(num) {
+			return this + num;
+		};
+
+		var n = 5;
+		assert(n.add(3) == 8, 
+			"It works when the number is in a variable.");
+
+		assert((5).add(3) == 8, 
+			"Also if a number is wrapped in ()");
+
+		// Page won't even load. Syntax parser can't handle the literal case.
+		assert(5.add(3) == 8, "What about a simple lieral?");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

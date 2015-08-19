@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang='en'>
+
+<head>
+	<metachatset='utf-8'>
+	<title>Hello</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		(function() {
+			var queue = [], paused = false;
+
+			this.test = function(fn) {
+				queue.push(fn);
+				runTest();
+			};
+
+			this.pause = function() {
+				paused = true;
+			};
+
+			this.resume = function() {
+				paused = false;
+				setTimeout(runTest, 1);
+			};
+
+			function runTest() {
+				if (!paused && queue.length) {
+					// shift returns the first element removed from the array so queue.shift()() first removes the first element, returns the function in this case and then runs it with (fun)() or the second ()
+					queue.shift()();
+					if (!paused) resume();
+				}
+			}
+		})();
+	</script>
+</body>
+
+</html>

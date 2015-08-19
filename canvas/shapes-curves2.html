@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+  	  		var path = new Path2D();
+          path.moveTo(75, 40);
+          path.bezierCurveTo(75,37,70,25,50,25);
+          path.bezierCurveTo(20,25,20,62.5,20,62.5);
+          path.bezierCurveTo(20,80,40,102,75,120);
+          path.bezierCurveTo(110,102,130,80,130,62.5);
+          path.bezierCurveTo(130,62.5,130,25,100,25);
+          path.bezierCurveTo(85,28,75,37,75,40);
+          ctx.fill(path);
+  	  	}
+  	  }
+  	</script>
+</html>
+

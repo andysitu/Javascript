@@ -1,0 +1,64 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		// closure function returns the argument as undefined and then 10, 
+		// Then when delay is finally run, it is given the function argument where
+		// it reads the argument from delay if the argument is undefined in 
+		// the closure function and then assigns arguments and increases
+		// arg count afterwards.
+		Function.prototype.partial = function() {
+			var fn = this, args = Array.prototype.slice.call(arguments);
+			return function() {
+				var arg = 0;
+				for (var i = 0; i < args.length; i++) {
+					if (args[i] === undefined) {
+						args[i] = arguments[arg++];
+					}
+				}
+				console.log(args);
+				return fn.apply(this, args);
+			};
+		};
+
+		var delay = setTimeout.partial(undefined, 10);
+		delay(function() {
+			assert(true, 
+				"A call to this function will be delayed 10 ms.");
+		});
+
+		// Adds listener that is currently undefined of the click event to the body
+		var bindClick = document.body.addEventListener.partial("click", undefined, false);
+
+		// runs bindClick and then finally sets the function for the undefined section.N
+		bindClick(function(){
+			assert(true, "Click event bound via curried function.");
+		});
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

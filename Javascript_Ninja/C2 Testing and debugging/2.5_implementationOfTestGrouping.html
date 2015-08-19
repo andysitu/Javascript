@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>Test Suite</title>
+		<script>
+			//Declare anonymous function within () and declare in same declaration
+			(function() {
+				var results;
+				// I believe this refers to global object or context
+				this.assert = function assert(value, desc) {
+					//create element <li> which will be part of <ul> in a list
+					var li = document.createElement("li");
+					//give it a class pass or fail for coloring style later
+					li.className = value ? "pass" : "fail";
+					//Create text node and then append it to li
+					li.appendChild(document.createTextNode(desc));
+					//appends li to results as a child
+					results.appendChild(li);
+					if (!value) {
+						// Going to parent node of li (ul)'s parent node (body)
+						// If the body contains a fail case, then the parent line will be red
+						li.parentNode.parentNode.className = "fail";
+					}
+					return li;
+				};
+				// Creates <ul> --> <li> --> <ul> --> <li>
+				this.test = function test(name, fn) {
+					results = document.getElementById("results");
+					//results = results.appendChild[From assert function](li("A test").ul[From createlement].li("First thru third assertion")[From fn()]
+					results = assert(true, name).appendChild(
+						document.createElement("ul"));
+					//Further assert just adds to the reuslts.appendChild again so it adds to the last location <li> (A third test)
+					fn();
+				};
+			})();
+
+			window.onload = function() {
+				test("A test.", function() {
+					assert(true, "First assertion completed");
+					assert(true, "Second assertion completed");
+					assert(true, "Third assertion completed");
+				});
+
+				test("Another test.", function() {
+					assert(true, "First test competed");
+					assert(false, "Second test failed");
+					assert(true, "Third assertion completed");
+				});
+
+				test("A third test.", function() {
+					assert(null, "fail");
+					assert(5, "pass");
+				});
+			};
+			</script>
+			<style>
+				#results li.pass { color: green; }
+				#results li.fail { color: red; }
+			</style>
+
+	</head>
+
+	<body>
+		<ul id="results">
+	</body>
+
+</html>

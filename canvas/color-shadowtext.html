@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+  	  		ctx.shadowOffsetX = 2;
+          ctx.shadowOffsetY = 2;
+          ctx.shadowBlur = 2;
+          ctx.shadowColor = 'rgba(0,0,0,0.5)';
+
+          ctx.font = '20px Timees New Roman';
+          ctx.fillStyle = "Black";
+          ctx.fillText("Sample String", 10, 30);
+  	  	}
+  	  }
+  	</script>
+</html>

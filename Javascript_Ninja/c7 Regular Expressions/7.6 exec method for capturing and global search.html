@@ -1,0 +1,48 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		// Performs a global search by using exec() method, but also does a local match.
+
+		var html = "<div class ='test'><b>Hello</b> <i>world!</i></div>";
+		// match is just another variable created
+		var tag = /<(\/?)(\w+)([^>]*?)>/g, match;
+		var num = 0;
+
+		// exec retains state from its previous invocation so that
+		// each subsequent call progresses to the next global  match
+		while ((match = tag.exec(html)) !== null) {
+			assert(match.length == 4,
+				"Every match finds each tag and 3 captures.");
+			num++;
+		}
+
+		assert(num == 6, "3 opening and 3 closing tags found.");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

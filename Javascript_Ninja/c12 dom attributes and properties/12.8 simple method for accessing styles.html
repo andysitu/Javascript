@@ -1,0 +1,57 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<div style="color:red;font-size:10px;background-color:#eee;"></div>
+
+	<script type="text/javascript">
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		function style(element, name, value) {
+			// i means ignore case
+			name = name.replace(/-([a-z])/ig,
+						// captured groups
+						// all for everything, eg -c, letter for the letter, eg c
+						function(all,letter) {
+							return letter.toUpperCase();
+						});
+
+			if (typeof value !== 'undefined') {
+				element.style[name] = value;
+			}
+
+			return element.style[name];
+		}
+
+		window.onload = function() {
+			var div = document.getElementsByTagName('div')[0];
+
+			assert(true,style(div, 'color'));
+			assert(true,style(div, 'font-size'));
+			assert(true,style(div,'background-color'));
+
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+		
+	</script>
+	
+</body>
+
+</html>

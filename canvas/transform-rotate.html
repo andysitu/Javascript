@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+          ctx.fillStyle = '#0095DD';
+          ctx.save();
+          ctx.fillRect(30,30,100,100);
+          ctx.rotate(Math.PI/180*25);
+
+          ctx.fillStyle = '#4D4E53';
+          ctx.fillRect(30,30,100,100);
+          ctx.restore();
+
+          ctx.fillRect(150,30,100,100);
+
+          ctx.translate(200,80);
+
+          ctx.rotate(Math.PI/180*25);
+          ctx.translate(-200, -80);
+
+          ctx.fillStyle = '#4D4E53';
+          ctx.fillRect(150,30,100,100);
+  	  	}
+  	  }
+  	</script>
+</html>

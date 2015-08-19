@@ -1,0 +1,53 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<div id="opacity"
+		style="opacity:0.5;filter:alpha(opacity=50);">
+	</div>
+
+	<script type="text/javascript">
+	
+		function getOpacity(elem) {
+			var filter = elem.style.filter;
+			console.log(filter);
+			console.log(filter.match(/opacity=([^)]+)/[1]));
+			return filter ?
+				// Oh, filter:alpha(opacity = 50) is only for IE 8 or lower
+				// thus, it does apply in other browsers.
+			   filter.indexOf("opacity=") >= 0 ?
+			   		// filters out where first it's opacity= and then ( [^)]+ ), meaning anything except ) (by using the ^ in [] bracket)
+			      (parseFloat(filter.match(/opacity=([^)]+)/[1])) / 100) + "" :
+			      "" :
+			   elem.style.opacity;
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+			assert(
+				getOpacity(document.getElementById("opacity")) == "0.5",
+				   "The opacity of the element has been obtained.");
+		};
+	</script>
+	
+</body>
+
+</html>

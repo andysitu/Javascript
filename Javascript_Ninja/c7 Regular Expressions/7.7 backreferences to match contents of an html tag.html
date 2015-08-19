@@ -1,0 +1,66 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		var html = "<b class = 'hello'>Hello</b> <i>world</i>";
+
+		// First capture: 
+			//any alphanumeric character including underscore _; + means it can appear as many times
+		// 2nd capture: 
+			//space is what usually starts the next one since /w doesn't include space. The next captures everything except > which is what ends this capture.
+		// 3rd capture;
+			// Any character except newline (.) repeated zero or many times (*) and nongreedy (by ? following *, meaning it will consume only enough characters to make a match)
+		//Remaining: 
+			// First takes in / with \/ and the \1 replicates what the first capture did.
+		var pattern = /<(\w+)([^>]*)>(.*?)<\/\1>/g;
+		// (.*?) makes it so that it will be ungreedy. Greedy will eat up everything until the last ending criteria, even if it encounters a first time, if there is another time then it will keep on going.
+		// Nongreedy will only do it the moment it encounters the first ending criteria.
+
+
+		var match = pattern.exec(html);
+
+		assert(match[0] == "<b class = 'hello'>Hello</b>",
+			"The entire tag, start to finish");
+		assert(match[1] == "b", "The tag name");
+		assert(match[2] == " class = 'hello'", "The tag attributes.");
+		assert(match[3] == "Hello", "The contents of the tag.");
+
+		match = pattern.exec(html);
+
+		assert(match[0] == "<i>world</i>",
+			"The entire tag, start to finish.");
+		assert(match[1] == "i", "The tag name.");
+		assert(match[2] == "", "The tag attributes.");
+		assert(match[3] == "world", "The contents of the tag.");
+
+		assert("fontFamily".replace( /([A-Z])/g, "-$1").toLowerCase() == "font-family",
+			"Convert the camelCase into dashed notation.");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

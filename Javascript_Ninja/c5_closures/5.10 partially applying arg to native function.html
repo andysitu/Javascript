@@ -1,0 +1,41 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		// Doesn't work yet, until 5.12
+		String.prototype.csv = String.prototype.split.partial(/,\s*/);
+
+		var results = ("Mugan, Jin Fuu").csv();
+
+		assert(results[0]=="Mugan" &&
+			results[1]=="Jin" &&
+			results[2]=="Fuu",
+			"The tet values were split poorly");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

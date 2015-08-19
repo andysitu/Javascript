@@ -1,0 +1,85 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<div id="testSubject"></div>
+
+	<script>
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+
+	<script type="text/javascript">
+		(function() {
+			var translations = {
+				"for": "htmlFor",
+				"class": "className",
+				readonly: "readOnly",
+				maxlength: "maxLength",
+				cellspacing: "cellSpacing",
+				rowspan: "rowSpan",
+				colspan: "colSpan",
+				tabindex: "tabIndex",
+				cellpadding: "cellPadding",
+				usemap: "useMap",
+				frameborder: "frameBorder",
+				contenteditable: "contentEditable"
+			};
+
+			window.attr = function(element, name, value) {
+				var property = translations[name] || name,
+					propertyExists = typeof element[name] !== 'undefined';
+
+				if (typeof value !== 'undefined') {
+					if (propertyExists) {
+						element[name] = value;
+					}
+					else {
+						element.setAttribute(name, value);
+					}
+				}
+
+				return propertyExists ? 
+					element[property] :
+					element.getAttribute(name);
+			};
+		})();
+
+		var subject = document.getElementById('testSubject');
+		assert(attr(subject,'id') === 'testSubject',
+			"id value fetched");
+
+		assert(attr(subject, 'id', 'other') === 'other',
+			"new id value set");
+		assert(attr(subject, 'id') === 'other',
+			"new id value fetched");
+
+		assert(attr(subject, 'data-custom', 'whatever') === 'whatever',
+			"custom attribute set");
+		assert(attr(subject, 'data-custom') === 'whatever',
+			"custom attribute fetchd");
+	</script>
+	
+</body>
+
+</html>

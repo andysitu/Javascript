@@ -1,0 +1,50 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+	<button id="test">Click Me</button>
+
+	<script type="text/javascript">
+		// Function that serves as an object method that is bound
+		// to a DOM element as an event listener
+		var button = {
+			clicked: false,
+
+			click: function() {
+				this.clicked = true;
+				console.log(this.clicked);
+				console.log(this);
+				assert(button.clicked, "The button has been clicked.");
+			}
+		}
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		var elem = document.getElementById("test");
+		// method click bound to DOM element elem
+		// but the context for this is set to the <button> element, not the button object
+		elem.addEventListener("click", button.click, false);
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

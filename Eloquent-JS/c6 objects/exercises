@@ -1,0 +1,106 @@
+function Vector(x, y) {
+	this.x = x;
+  	this.y = y;
+}
+
+Vector.prototype.plus = function(vect) {
+  return new Vector(this.x + vect.x, this.y + vect.y);
+};
+Vector.prototype.minus = function(vect) {
+  return new Vector(this.x - vect.x, this.y - vect.y);
+};
+
+Object.defineProperty(Vector.prototype, "length", {
+  get: function() {return Math.sqrt(this.x * this.x + this.y * this.y) });
+
+
+
+var logger = new StretchCell(new TextCell("abc"), 1, 2);
+console.log(logger.minWidth());
+console.log(logger.minHeight());
+console.log(logger.draw(3, 2));
+
+
+
+function logFive(seq) {
+	for (var i = 0; i < 5; i++) {
+		if (!seq.next())
+			break;
+		console.log(seq.current())
+	}
+}
+
+function ArraySeq(arr) { 
+	this.arr = arr;
+	this.count = -1;
+}
+
+ArraySeq.prototype.next = function() {
+	if (this.count >= this.arr.length - 1)
+		return false;
+	this.count++;
+	return true;
+};
+
+ArraySeq.prototype.current = function() {
+	return this.arr[this.count];
+};
+
+function RangeSeq(from, to) {
+	this.count = from - 1;
+	this.to = to;
+}
+
+RangeSeq.prototype.next = function() {
+	if (this.count >= this.to)
+		return false;
+	this.count++;
+	return true;
+};
+RangeSeq.prototype.current = function() {
+	return this.count;
+};
+
+
+
+function logFive2(sequence) {
+  for (var i = 0; i < 5 && sequence != null; i++) {
+    console.log(sequence.head());
+    sequence = sequence.rest();
+  }
+}
+
+function ArraySeq2(array, offset) {
+  this.array = array;
+  this.offset = offset;
+}
+ArraySeq2.prototype.rest = function() {
+  return ArraySeq2.make(this.array, this.offset + 1);
+};
+ArraySeq2.prototype.head = function() {
+  return this.array[this.offset];
+};
+ArraySeq2.make = function(array, offset) {
+  if (offset == null) offset = 0;
+  if (offset >= array.length)
+    return null;
+  else
+    return new ArraySeq2(array, offset);
+};
+
+function RangeSeq2(from, to) {
+  this.from = from;
+  this.to = to;
+}
+RangeSeq2.prototype.rest = function() {
+  return RangeSeq2.make(this.from + 1, this.to);
+};
+RangeSeq2.prototype.head = function() {
+  return this.from;
+};
+RangeSeq2.make = function(from, to) {
+  if (from > to)
+    return null;
+  else
+    return new RangeSeq2(from, to);
+};

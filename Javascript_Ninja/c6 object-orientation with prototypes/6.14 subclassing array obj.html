@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+		function MyArray() {}
+
+		MyArray.prototype = new Array();
+
+		var mine = new MyArray();
+		mine.push(1, 2, 3);
+
+		assert(mine.length == 3,
+			"All the items are in our sub-classed Array.");
+		assert(mine instanceof Array, 
+			"Verify we implement the Array functionality. But might not work in IE");
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+	
+</body>
+
+</html>

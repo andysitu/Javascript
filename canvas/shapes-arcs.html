@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body onload="draw();">
+  	<canvas id="tutorial" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  function draw() {
+  	  	var canvas = document.getElementById("tutorial");
+  	  	if (canvas.getContext) {
+  	  		var ctx = canvas.getContext('2d');
+
+  	  		for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 3; j++) {
+              var path = new Path2D();
+              var x = 25+ j * 50;
+              var y = 25 + i * 50;
+              var radius = 20;
+              var startAngle = 0;
+              var endAngle = Math.PI + (Math.PI * j)/2;
+              var anticlockwise = i %2==0 ? false: true;
+
+              path.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+              if (i > 1) {
+                ctx.fill(path);
+              } else {
+                ctx.stroke(path);
+              }
+            }
+          }
+  	  	}
+  	  }
+  	</script>
+</html>
+

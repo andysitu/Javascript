@@ -1,0 +1,52 @@
+<html>
+
+<head>
+	<title>Test Suite</title>
+
+	<style>
+		#results li.pass { color: green;}
+		#results li.fail { color: red; }
+	</style>
+</head>
+
+<body>
+	<ul id="results"></ul>
+
+	<script>
+
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		window.onload = function() {
+			assert(true, "The test suite is running");
+			assert(false, "Fail!");
+		};
+	</script>
+
+	<form id="testForm" action="/"></form>
+
+	<script type="text/javascript">
+		window.onload = function() {
+
+			var input = document.createElement('input');
+
+			input.type = 'text';
+			assert(input.type == 'text',
+				"input type is text.");
+
+			document.getElementById('testForm').appendChild(input);
+
+			input.type = 'hidden';
+			assert(input.type == 'hidden',
+				"Input type changed to hidden.");
+
+		}
+	</script>
+	
+</body>
+
+</html>

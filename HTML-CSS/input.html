@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Input</title>
+</head>
+
+<body>
+	<form>
+		<p>Username:
+			<input type="text" name="username" maxlength="30" />
+		</p>
+		<p>Password:
+			<input type="password" name="password" maxlength="30">
+		</p>
+
+		<p>What do you think?</p>
+		<textarea name="comments">Enter what you think</textarea>
+
+		<p>Select your favorite food:
+			<br>
+			<input type="radio" name="food" value="pizza"
+			   checked="checked" />Pizza
+			<input type="radio" name="food" value="pasta" />
+			   Pasta
+			<input type="radio" name="food" value="rice" />
+			   Rice
+		</p>
+
+		<p>
+			Select your favorite food:
+			<br />
+			<input type="checkbox" name="food" value="pizza" checked="chekced" />
+			Pizza
+			<input type="checkbox" name="food" value="pasta" /> Pasta
+			<input type="checkbox" name="food" value="rice" /> Rice
+		</p>
+
+		<p> What is your favorite food?</p>
+		<select name="food">
+			<option value="pizza">Pizza</option>
+			<option value="pasta">Pasta</option>
+			<option value="rice">Rice</option>
+		</select>
+
+		<p> What is your favorite food?</p>
+		<select name="food" size="3" multiple="multiple">
+			<option value="pizza">Pizza</option>
+			<option value="pasta">Pasta</option>
+			<option value="rice">Rice</option>
+		</select>
+
+		<p>Upload</p>
+		<input type="file" name="test" /><br>
+		<input type="submit" value="Upload" />
+
+		<p>Testing submit</p>
+		<input type="text" name="test" />
+		<input type="submit" name="subscribe" 
+		   value="Subscribe" />
+
+		<p>Testing image input</p>
+		<input type="text" name="test" />
+		<input type="image" />
+
+
+		<br /><br />
+
+		<button>Add</button>
+		<input type="hidden" name="bookmark" value="test" />
+
+		<br /><br />
+
+		<label>Age: <input type="text" name="test" /></label>
+		<br/ >
+		Gender:
+		<input id="female" type="radio" name="gender" value="f">
+		<label for="female">Female</label>
+		<input id="male" type="radio" name="gender" value="m">
+		<label for="male">Male</label>
+
+		<br><br>
+
+
+		<fieldset>
+			<legend>Contact details</legend>
+			<label>Email:<br />
+			<input type="text" name="email" /></label><br />
+			<label>Mobile:<br />
+			<input type="text" name="mobile" /></label><br />
+			<label>Telelphone:<br />
+			<input type="text" name="telephone" /></label>
+		</fieldset>
+
+		<br /><br />
+
+		<label for="username">Username:</label>
+		<input type="text" name="username" required="required" /></title><br />
+		<label for="password">Password:</label>
+		<input type="password" name="password" required="required" />
+		<input type="submit" value="Submit" />
+
+		<br /><br />
+
+		<label>Date:</label>
+		<input type="date" name="depart" />
+		<input type="submit" value="Submit" />
+
+		<br /><br />
+
+		<p>Email Address:</p>
+		<input type="email" name="email" />
+		<input type="submit" value="Submit" />
+
+		<p>Website address:</p>
+		<input type="url" name="website" />
+		<input type="submit" value="Submit" />
+
+		<p>Search:</p>
+		<input type="search" name="search" />
+		<input type="submit" value="Search" />
+
+		<p>Search:</p>
+		<input type="search" name="search"
+		   placeholder="Enter keyword" />
+		<input type="submit" value="Search" />
+
+		<br /><br />
+
+		<iframe width="600" height="450" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/view?zoom=9&center=39.9042,116.4074&key=AIzaSyDDSt1xY80AaNVRfbzHdyVCwecrCljAvbY"></iframe>
+
+	</form>
+</body>
+
+</html>

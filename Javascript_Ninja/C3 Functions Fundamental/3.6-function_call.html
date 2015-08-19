@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+	<meta charset="utf-8">
+	<title>Testing</title>
+
+	<script>
+		function assert(value, desc) {
+			var li = document.createElement("li");
+			li.className = value ? "pass" : "fail";
+			li.appendChild(document.createTextNode(desc));
+			document.getElementById("results").appendChild(li);
+		}
+
+		function onloader() {
+			// Actual command of forEach
+			forEach(
+			weapons, 
+			function(index) {
+				// this, which is in first parameter for call and apply
+				// is list[n] in this case.
+				assert( this == weapons[index], 
+					"Got the expected value of " + weapons[index]);
+			}
+			); 
+		}
+
+		function forEach(list,callback) {
+			for (var n = 0; n < list.length; n++) {
+				// callback refers to a function, not an actual command
+				// list[n] is given to this, while n is like an array
+				// with only 1 value and is applied thru
+				// each for loop. List already exisets, so only n is needed
+				/// which is index.
+				callback.call(list[n], n);
+			}
+		}
+		
+		var weapons = ['shuriken', 'katana', 'nunchucks'];
+
+		window.onload = onloader;
+
+	</script>
+
+	<style>
+		#results li.pass { color: green; }
+		#results li.fail { color: red; }
+	</style>
+
+</head>
+
+<body>
+	<ul id="results"></ul>
+</body>
+</html>

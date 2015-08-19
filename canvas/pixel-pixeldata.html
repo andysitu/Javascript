@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Canvas tutorial</title>
+
+    <style type="text/css">
+      canvas {
+  	    border: 1px solid black;
+      }
+
+    </style>
+  </head>
+
+  <body>
+  	<canvas id="canvas" width="400" height="400"></canvas>
+
+  	<script type="application/javascript">
+  	  var img = new Image();
+      img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        img.style.display = 'none';
+      };
+      var color = document.getElementById('color');
+      function pick(event) {
+        var x = event.layerX;
+        var y = event.layerY;
+        var pixel = ctx.getImageData(x,y,1,1);
+        var data = pixel.data;
+        var rgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + data[3] + ')';
+        color.style.background = rgba;
+        color.textContet = rgba;
+      }
+
+      canvas.addEventListener('mousemove', pick);
+  	</script>
+</html>
