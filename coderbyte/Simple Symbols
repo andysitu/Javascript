@@ -1,0 +1,18 @@
+function SimpleSymbols(str) { 
+
+  str = str.replace(/\+([A-Za-z]\+)+/g, "");
+  return !/[A-Za-z]/.test(str); 
+         
+}
+
+
+
+
+
+
+function SimpleSymbols(str) { 
+
+  // code goes here  
+  return ('='+str+'=').match(/([^\+][a-z])|([a-z][^\+])/gi)===null; 
+         
+}

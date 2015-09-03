@@ -1,0 +1,20 @@
+function LetterCapitalize(str) { 
+
+  str = str.split(" ");
+  for (var i = 0, len = str.length; i < len; i++ ){
+   str[i] = str[i].replace(/\w/, function(letter) { ;return letter.toUpperCase(); }); 
+  }
+  
+  return str.join(" "); 
+         
+}
+
+
+
+
+
+
+
+function LetterCapitalize(str) { 
+  return str.replace(/\b[a-z]/g,function(c){return c.toUpperCase()});
+}	
