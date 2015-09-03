@@ -1,0 +1,26 @@
+function LongestWord(sen) { 
+  var max = 0,
+      index = 0;
+  var results = sen.match(/[A-Za-z]*/g);
+  for (var i = 1, len = results.length; i < len; i++) {
+    if (results[i].length > max) {
+		max = results[i].length;
+      	index = i;
+    }
+  }
+  
+  return results[index]; 
+         
+}
+
+
+
+
+
+
+function LongestWord(sen) { 
+  var words = sen.split(" ").sort(function(a,b){
+    return b.replace(/[^a-z]/gi,"").length - a.replace(/[^a-z]/gi,"").length;
+  });
+  return words.shift();
+}

@@ -1,0 +1,28 @@
+var merge = function(arr1, arr2, callback) {
+	var arr = [];
+
+	for (var i = 0, len = arr1.length; i < len; i++) {
+		arr[i] = callback(arr1[i], arr2[i]);
+	}
+
+	return arr;
+};
+
+var x = merge([1,2,3,4], [5,6,7,8], function(a,b) {
+	return a + b;
+});
+
+
+var euclid = function(coords1, coords2) {
+	var arr = merge(coords1, coords2, function(a,b) {
+		return (a - b)*(a - b);
+	});
+
+	var value = arr.reduce(function(prev, curr) {
+		return prev + curr;
+	});
+
+	return Math.sqrt(value);
+};
+
+var y = euclid([1.2, 3.67], [2.04, 4.4]);
