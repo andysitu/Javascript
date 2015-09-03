@@ -1,0 +1,9 @@
+function ExOh(str) { 
+
+  try {
+   return str.match(/x/g).length == str.match(/o/g).length 
+  } catch(e) {
+   return false; 
+  }
+         
+}

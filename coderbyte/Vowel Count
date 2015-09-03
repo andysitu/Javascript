@@ -1,0 +1,5 @@
+function VowelCount(str) { 
+
+  return str.toLowerCase().match(/[aeiou]/g).length; 
+         
+}

@@ -1,0 +1,7 @@
+function Palindrome(str) { 
+
+  str = str.replace(/[\W]/g, "");
+  var test2 = str.split("").reverse().join("");
+  return str == test2;
+         
+}

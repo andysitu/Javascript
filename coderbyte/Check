@@ -1,0 +1,14 @@
+function ABCheck(str) { 
+ 
+  return /a[\w\W]{3}b/.test(str); 
+         
+}
+
+
+
+
+
+
+function ABCheck(str) { 
+  return /a...b/g.test(str);
+}
