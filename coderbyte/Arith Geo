@@ -1,0 +1,31 @@
+function ArithGeo(arr) { 
+
+  var end = arr.length -1;
+  if (arr[end] / arr[0] == Math.pow(arr[1] / arr[0], end)) {
+  	return "Geometric";
+  } else if (arr[end] - arr[0] == (arr[1] - arr[0]) * end) {
+  	return "Arithmetic";  
+  } else {
+  	return -1;  
+  }    
+}
+
+
+
+
+
+
+
+
+
+
+
+function ArithGeo(arr) { 
+  if(arr[1] - arr[0] === arr[arr.length -1] - arr[arr.length -2]){
+    return "Arithmetic"; 
+  }
+  if(arr[1] / arr[0] === arr[arr.length -1] / arr[arr.length -2]){
+    return "Geometric"; 
+  }
+  return -1;
+}
