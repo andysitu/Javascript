@@ -1,0 +1,7 @@
+function PalindromeTwo(str) { 
+
+  str = str.replace(/[\W]/g, "").toLowerCase();
+  var test2 = str.toLowerCase().split("").reverse().join("");
+  return str == test2;
+         
+}

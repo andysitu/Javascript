@@ -1,0 +1,33 @@
+function StringScramble(str1,str2) { 
+
+  // code goes here  
+  str1 = str1.toLowerCase().split("").sort();
+  str2 = str2.toLowerCase().split("").sort();
+  if (str1.length > str2.length) {
+    var max = str1,
+        min = str2;
+  } else {
+    var max = str2,
+        min = str1;
+  }
+  var j = 0
+  
+  
+  for (var i = 0; i < min.length; i++) {
+    for (; j < max.length; j++) {
+      if (min[i] == max[j]) {
+          j++;
+        break;
+      }
+      if (min[i] < max[j]){
+        return false;
+      }
+      if (j+1 == max.length && max[j] != min[i]) {
+        return false;
+      }
+    }
+  }
+  
+  return true;
+         
+}

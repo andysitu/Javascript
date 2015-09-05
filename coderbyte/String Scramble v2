@@ -1,0 +1,22 @@
+function StringScramble(str1,str2) { 
+
+  if (str1.length > str2.length) {
+    var max = str1,
+        min = str2;
+  } else {
+    var max = str2,
+        min = str1;
+  }
+  
+  for (var i = 0; i < min.length; i++) {
+    var reg = new RegExp(min[i]);
+    if (reg.test(max)) {
+      max = max.replace(reg, "");
+    } else {
+      return false;  
+    }
+  }
+  
+  return true;
+         
+}

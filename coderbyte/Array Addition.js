@@ -30,7 +30,7 @@ function comboMixer(arr) {
   return combo;
 }
 
-function ArrayAdditionI(arr) {
+function ArrayAddition(arr) {
   arr.sort(function(a,b){
     return a-b;
   });
@@ -77,4 +77,26 @@ function ArrayAddition(arr) {
   }
   return false;
          
+}
+
+
+
+
+
+
+
+
+
+
+function ArrayAddition(arr) { 
+  var largest = arr.sort(function(a,b){return a-b}).pop();
+  function rec(target,array){
+    if(array.length === 0){
+      return target === 0; 
+    }
+    var n = array[0];
+    array = array.slice(1);
+    return rec(target,array) || rec(target-n,array);
+  }
+  return rec(largest,arr);
 }

@@ -1,0 +1,9 @@
+function Division(num1,num2) { 
+
+  var min = Math.min(num1, num2);
+  for (var i = min; i > 0; i--) {
+  	if (num1 % i == 0 && num2 % i == 0)
+      return i;
+  }
+         
+}
