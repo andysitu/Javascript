@@ -1,4 +1,4 @@
-function CountingMinutesI(str) { 
+function CountingMinutes(str) { 
 
   var time1, time2;
   str = str.split("-");

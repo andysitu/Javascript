@@ -1,0 +1,20 @@
+function FormattedDivision(num1,num2) { 
+
+  var ans = String(Math.round(num1/ num2 * 10000) / 10000);
+  if (ans.length <= 3) {
+    return ans;
+  }
+  
+  var string = [], slices;
+  ans = String(ans);
+  fract = ans.split(".")[1];
+  string = ans.split(".")[0];
+  string = string.split("").reverse();
+  
+  for (var i = 0; i < string.length; i++) {
+   if (i % 3 == 0 && i !== 0) {
+     string[i] = "," + string[i];
+   }
+  }
+  return string.join("").split("").reverse().join("") + "." + fract;
+}
