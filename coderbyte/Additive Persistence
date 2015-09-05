@@ -1,0 +1,13 @@
+function AdditivePersistence(num) { 
+  num = String(num);
+  var counter = 0;
+  while (num > 9) {
+    num = String(num);
+  	num = num.split("");
+    num = num.reduce(function(a,b) {return Number(a) + Number(b);});
+    counter++;
+  }
+  
+  return counter; 
+         
+}

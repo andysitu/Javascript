@@ -1,0 +1,35 @@
+function MultiplicativePersistence(num) { 
+
+  if (num < 10)
+    return 0;
+  var  counter=0, sum = 11;
+  
+  while (sum > 9) {
+    sum = 1;
+    while (num > 1) {
+      sum *= num % 10;
+      console.log(sum);
+      num = Math.floor(num/10);
+    }
+    num = sum;
+    counter++
+  }
+  return counter;
+         
+}
+
+
+
+
+
+
+
+function MultiplicativePersistence(num) { 
+  var c = 0;
+  var n = num.toString();
+  while (n.length > 1) {
+    c += 1;
+    n = eval(n.split('').join('*')).toString();
+  }
+  return c;  
+}

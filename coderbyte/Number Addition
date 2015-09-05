@@ -1,0 +1,11 @@
+function NumberAddition(str) { 
+
+  var match = str.match(/\d+/g);
+  var sum = 0;
+  for (var i = 0; i < match.length; i++) {
+      sum += Number(match[i]);
+  }
+  
+  return sum;
+         
+}
