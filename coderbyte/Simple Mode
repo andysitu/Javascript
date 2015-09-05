@@ -1,0 +1,19 @@
+function SimpleMode(arr) { 
+  
+  var i = 0, len = arr.length, obj = {};
+
+  for ( ; i < len; i++) {
+  	obj[arr[i]] = (obj[arr[i]] || 0) + 1;
+  }
+  
+  var max = 1, letter = -1;
+  
+  for ( i = 0; i < len; i++) {
+   if (obj[arr[i]] > max) {
+   	max = obj[arr[i]];
+    letter = arr[i];
+   }
+  }
+  return letter;
+         
+}

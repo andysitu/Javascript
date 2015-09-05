@@ -1,0 +1,14 @@
+function OffLineMinimum(strArr) { 
+	var arr = [], num = [];
+  
+  for (var i = 0; i < strArr.length; i++) {
+   if (strArr[i] == "E") {
+     num.push(arr.shift());
+   } else {
+   	arr.push(strArr[i]);
+    arr.sort(function(a,b){return a-b;});
+   }
+  }
+  return num.join(","); 
+         
+}
