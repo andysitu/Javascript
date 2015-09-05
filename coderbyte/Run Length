@@ -1,0 +1,19 @@
+function RunLength(str) { 
+
+  var str1 = '', len = str.length, count = 0;
+  
+  for (var i = 0; i < len; i++) {
+    if (str[i] === str[i+1]) {
+      count++;  
+    } else if (count > 0) {
+      count++;
+      str1 += count + str[i];
+      count = 0;
+    } else {
+     str1 += "1" + str[i]; 
+    }
+  }
+  
+  return str1;
+         
+}

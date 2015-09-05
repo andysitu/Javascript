@@ -1,0 +1,9 @@
+function PrimeTime(num) { 
+
+  for (var i = 2, lim = Math.sqrt(num); i <= lim; i++) {
+  	if (num % i == 0)
+      return false;
+  }
+  return true; 
+         
+}

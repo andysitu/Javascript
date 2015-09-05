@@ -1,0 +1,52 @@
+function PrimeMover(num) { 
+
+  var counter = 1, number = 2;
+  
+  while (counter < num) {
+  	number++;
+    if (PrimeTime(number))
+      counter++;
+  }
+  return number;       
+}
+
+function PrimeTime(num) { 
+
+  for (var i = 2, lim = Math.sqrt(num); i <= lim; i++) {
+  	if (num % i == 0)
+      return false;
+  }
+  return true; 
+         
+}
+
+
+
+
+
+
+
+
+
+// ex. if i is then, then it adds 2 to i iteratively until reaching
+// max number. All points along there will not be a prime because 
+// they'll be multiples of it. Then, 3, then 5, and so on.
+function PrimeMover(num) { 
+  var primes=[];
+  var data=[];
+  var i=2;
+  var max=(num*num<10000)?num*num:10000;
+  while(i<2+max&&primes.length<=num){
+    if(!data[i]){
+      data[i]=1;
+      primes.push(i);
+      for(var j=i*i;j<max;j+=i){
+        data[j]=1;
+      }
+    }
+    i++;
+  }
+  // code goes here  
+  return primes[num-1]; 
+         
+}
