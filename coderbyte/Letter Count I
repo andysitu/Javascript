@@ -1,0 +1,30 @@
+function LetterCountI(str) { 
+
+  var max = 0, index = -1;
+  
+  str = str.split(" ");
+  var copy = str.slice(0);
+  for (var i = 0; i < str.length; i++) {
+  	str[i] = str[i].split("").sort().join("");
+    var arr = str[i].match(/([a-z])\1{1,}/gi);
+    
+ 	try {
+      if (arr.length > 0)
+    	for (var j = 0; j < arr.length; j++) {
+        	if (arr[j].length > max) {
+             max = arr[j].length;
+             index = i
+            }
+        }
+    } catch(e) {  
+    }
+  }
+  if (index == -1) {
+      return -1;
+  }
+  return copy[index]; 
+         
+}
+
+
+Could have used a dictionary or key or map that counts the letter

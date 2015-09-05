@@ -1,0 +1,23 @@
+function CountingMinutesI(str) { 
+
+  var time1, time2;
+  str = str.split("-");
+  time1 = str[0].match(/(\d*):(\d*)(\w*)/);
+  time2 = str[1].match(/(\d*):(\d*)(\w*)/);
+  if (time1[3] == 'pm') {
+    time1 = Number(time1[1])*60 +  Number(time1[2]) + 720;
+  } else {
+      time1 = Number(time1[1])*60 + Number(time1[2]);
+  }
+  if (time2[3] == 'pm') {
+    time2 = Number(time2[1])*60 +  Number(time2[2]) + 720;
+  } else {
+      time2 = Number(time2[1])*60 + Number(time2[2]);
+  }
+
+  if (time2 > time1)
+    return (time2 - time1);
+  else
+    return (1440 - time1 + time2);
+         
+}
