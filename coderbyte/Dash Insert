@@ -1,0 +1,12 @@
+function DashInsert(str) { 
+
+  str = str.split("");
+  for (var i = 1; i < str.length; i++) {
+  	if (str[i-1] % 2 !== 0 && str[i] % 2 !== 0) {
+      str.splice(i,0,"-");
+      i++;
+    }
+  }
+  return str.join(""); 
+         
+}

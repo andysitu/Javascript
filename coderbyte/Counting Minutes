@@ -21,3 +21,36 @@ function CountingMinutesI(str) {
     return (1440 - time1 + time2);
          
 }
+
+
+
+
+
+
+
+
+
+
+function timeStrToMinutes(timeStr) {
+  var amPm = timeStr.slice(-2).toLowerCase();
+  timeStr = timeStr.slice(0,-2);
+  var bits = timeStr.split(':');
+  bits[0] = bits[0]*1;
+  if (bits[0] === 12) {
+    bits[0] = 0;
+  }
+  bits[1] = bits[1]*1;
+  return bits[0] * 60 + bits[1] + (amPm === 'pm' ? 12 * 60 : 0);
+}
+
+function CountingMinutesI(str) { 
+  var times = str.split('-');
+  var time1 = timeStrToMinutes(times[0]);
+  var time2 = timeStrToMinutes(times[1]);
+  if (time2 <= time1) {
+    time2 += 60 * 24;
+  }
+  // code goes here  
+  return time2-time1;
+         
+}

@@ -1,0 +1,19 @@
+function MeanMode(arr) { 
+
+  var obj = {}, max = 1, num = 0; 
+  
+  for (var i = 0; i < arr.length; i++) {
+   obj[arr[i]] = (obj[arr[i]] || 0) + 1;
+   if (obj[arr[i]] > max) {
+    max = obj[arr[i]];
+    num = arr[i];
+   }
+  }
+  var len = arr.length;
+  var mean = arr.reduce(function(a,b) { return a + b;}) / len;
+                        
+  if (num == mean)
+  	return 1;
+  else
+    return 0;
+}
