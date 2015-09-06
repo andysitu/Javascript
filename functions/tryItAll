@@ -1,0 +1,34 @@
+// Works with an array and makes combinations out of it
+// Uses Recursion in a for loop. Brute force.
+
+var combos = [];
+
+function tryItAll(key, combo) {
+    if (key.length == 0) {
+        combos.push(combo)
+    } else {
+      for (var i = 0, len = key.length; i < len; i++) {
+        var copy = key.slice(0);
+        copy.splice(i,1);
+        tryItAll(copy, combo + "" + key[i]);
+      }   
+        
+    }
+}
+
+// Works with a string instead of an array
+var combos = [];
+
+function tryItAll(str, combo) {
+    if (str.length == 0) {
+        combos.push(combo)
+    } else {
+      for (var i = 0, len = str.length; i < len; i++) {
+        var letter = str[i];
+        tryItAll(str.slice(0,i) + str.slice(i+1), combo + "" + letter);
+      }   
+        
+    }
+}
+
+
