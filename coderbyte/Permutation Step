@@ -1,0 +1,16 @@
+function PermutationStep(num) { 
+  var test = num;
+  test = String(test).split("").sort(function(a,b) {return b-a;}).join("");
+  if (test == String(num))
+      return -1;
+
+  
+  function sortIt(a,b) {return b-a;}
+  for (var i = num + 1; ; i++) {
+    if (String(i).split("").sort(sortIt).join("") == test){
+      return i;  
+    }
+  }
+  return num; 
+         
+}
