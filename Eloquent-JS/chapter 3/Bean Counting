@@ -1,0 +1,19 @@
+function countChar(string, letter) {
+  var count = 0;
+  for (var i = 0, len = string.length; i < len; i++) {
+    if (string.charAt(i) == letter) {
+      count++;  
+    }
+  }
+  
+  return count;
+}
+
+function countBs(string) {
+  return countChar(string, "B");  
+}
+
+console.log(countBs("BBC"));
+// → 2
+console.log(countChar("kakkerlak", "k"));
+// → 4
