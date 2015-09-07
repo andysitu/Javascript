@@ -1,0 +1,46 @@
+function arrayToList(arr, rest) { 
+  if (rest === undefined) {
+    return arrayToList(arr.slice(0,-1), prepend(arr[arr.length -1], null));
+  } else if (arr.length === 0) {
+    return rest;
+  } else {
+  	return arrayToList(arr.slice(0,-1), prepend(arr[arr.length -1], rest));
+  }
+}
+
+function listToArray(list, arr) {
+  if (arr === undefined) {
+    return listToArray(list.rest, [list.value]);
+  } else if (list.rest === null) {
+    return arr.concat(list.value);
+  } else {
+    return listToArray(list.rest, arr.concat(list.value));
+  }
+}
+
+function prepend(value, list) {
+  return {value: value, rest: list};  
+}
+
+function nth(list, index, currentIndex) {
+  if (index === 0)
+    return list.value;
+  if (currentIndex === undefined) {
+    return nth(list["rest"], index, 1);
+  } else if (list === null) {
+    return undefined;
+  } else if (index == currentIndex) {
+    return list.value;  
+  } else {
+    return nth(list["rest"], index, currentIndex+1);
+  }
+}
+
+console.log(arrayToList([10, 20]));
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(listToArray(arrayToList([10, 20, 30])));
+// → [10, 20, 30]
+console.log(prepend(10, prepend(20, null)));
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(nth(arrayToList([10, 20, 30]), 1));
+// → 20

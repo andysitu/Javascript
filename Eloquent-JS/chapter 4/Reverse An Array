@@ -1,0 +1,14 @@
+function reverseArray(arr) {
+  var newArr = [];
+  for (var i = 0, len = arr.length; i < len; i++) {
+    newArr.unshift(arr[i]);  
+  }
+  return newArr;
+}
+
+function reverseArrayInPlace(arr) {
+  for (var i = arr.length - 1; i >= 0; i--) {
+    arr.push(arr[i]);
+    arr.splice(i,1);
+  }
+}

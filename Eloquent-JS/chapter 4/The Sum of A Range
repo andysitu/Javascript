@@ -1,0 +1,15 @@
+function range(min, max, step) {
+    if (step === undefined)
+      step = 1;
+	var arr = [];
+	for (var i = min; i != max + step; i += step) {
+		arr.push(i);
+	}
+	return arr;
+}
+
+function sum(arr) {
+	var sum = 0;
+	arr.forEach(function(value) { sum += value;});
+	return sum;
+}
