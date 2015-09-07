@@ -1,0 +1,44 @@
+var combos = [];
+
+function tryItAll(str, combo, memo) {
+    if (combo.length === 0){
+        str = String(str);
+        memo = {};
+    }
+    if (str.length === 0) {
+        combos.push(combo)
+    } else {
+      for (var i = 0, len = str.length; i < len; i++) {
+        var letter = str[i],
+            sliced = str.slice(0,i) + str.slice(i+1);
+        if (sliced in memo && memo[sliced] == combo) {
+            continue;
+        } else {
+            memo[sliced] = combo;
+            tryItAll(sliced, combo + "" + letter,memo);
+        }
+      }   
+    }
+}
+
+function PrimeTime(num) {
+  num = parseInt(num);
+
+  for (var i = 2, lim = Math.sqrt(num); i <= lim; i++) {
+  	if (num % i == 0)
+      return false;
+  }
+  return true; 
+         
+}
+
+function PrimeChecker(num) { 
+
+  tryItAll(num, "");
+  for (var i = 0, len = combos.length; i < len; i++) {
+     if (PrimeTime(combos[i]))
+       return 1;
+  }
+  return 0; 
+         
+}

@@ -1,0 +1,18 @@
+function DashInsertII(num) { 
+  var newNum = "";
+  num = String(num);
+  var prev = -1,
+      sign;
+      
+  for (var i = 0, len = num.length; i < len; i++) {
+    sign = (num[i] == 0) ? 0 : num[i] % 2 == 0;
+    if (sign === true && prev === true)
+      newNum += "*";
+    if (sign === false && prev === false)
+      newNum += '-';
+    newNum += num[i];
+    prev = sign;
+  }
+  
+  return newNum; 
+}
