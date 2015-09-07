@@ -16,14 +16,42 @@ function tryItAll(key, combo) {
     }
 }
 
+// With dynamic programming (using memo)
+
+var combos = [],
+    memmo = {};
+
+function tryItAll(key, combo, memo) {
+    if (combo.length === 0) {
+      key = key.sort(function(a,b){return a-b;});
+      memo = {};
+    }
+    if (key.length === 0) {
+        combos.push(combo)
+    } else {
+      for (var i = 0, len = key.length; i < len; i++) {
+        var copy = key.slice(0);
+        copy.splice(i,1);
+        if (copy in memo && memo[copy] == combo) {
+          continue;
+        } else {
+          memo[copy] = combo;
+          tryItAll(copy, combo + "" + key[i], memo);
+        }
+      }   
+        
+    }
+}
+
 // Works with a string instead of an array
 var combos = [];
 
 function tryItAll(str, combo) {
-    if (str.length == 0) {
+    if (str.length === 0) {
         combos.push(combo)
     } else {
       for (var i = 0, len = str.length; i < len; i++) {
+        console.log(key);
         var letter = str[i];
         tryItAll(str.slice(0,i) + str.slice(i+1), combo + "" + letter);
       }   
@@ -32,3 +60,27 @@ function tryItAll(str, combo) {
 }
 
 
+// Use dynamic programming for string
+
+var combos = [];
+
+function tryItAll(str, combo, memo) {
+    if (combo.length === 0){
+        str = String(str);
+        memo = {};
+    }
+    if (str.length === 0) {
+        combos.push(combo)
+    } else {
+      for (var i = 0, len = str.length; i < len; i++) {
+        var letter = str[i],
+            sliced = str.slice(0,i) + str.slice(i+1);
+        if (sliced in memo && memo[sliced] == combo) {
+            continue;
+        } else {
+            memo[sliced] = combo;
+            tryItAll(sliced, combo + "" + letter,memo);
+        }
+      }   
+    }
+}
