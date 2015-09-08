@@ -1,0 +1,24 @@
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+function ageDiff(mother, child) { 
+  return child.born - mother.born; }
+
+function getMother(p) { 
+    return byName[p.mother]; 
+}
+
+var byName = {};
+ancestry.forEach(function(person) {
+  byName[person.name] = person;
+});
+
+var ages = ancestry.map(function(person) {
+  var mother = getMother(person);
+  if (mother != null)
+	return ageDiff(mother, person); 
+}).filter(function(value) { return value !== undefined}); 
+
+console.log(average(ages));

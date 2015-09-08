@@ -1,0 +1,21 @@
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+var centuries = {};
+function getCentury(person) {
+  return Math.ceil(person.died/100)
+}
+ancestry.forEach(function(person){
+  var century = getCentury(person);
+  if (century in centuries)
+  	centuries[century].push(age(person));
+  else
+    centuries[century] = [age(person)] });
+
+for (var key in centuries) {
+  centuries[key] = average(centuries[key]);
+}
+
+console.log(centuries);
