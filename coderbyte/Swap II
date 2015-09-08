@@ -1,0 +1,37 @@
+function SwapII(str) { 
+
+  var newStr = "";
+  
+  for (var i = 0, len = str.length; i < len; i++) {
+      if (/[a-z]/.test(str[i]))
+        newStr += str[i].toUpperCase();
+      else if (/[A-Z]/.test(str[i]))
+        newStr += str[i].toLowerCase();
+      else
+        newStr += str[i];
+  }
+  
+  newStr = newStr.replace(/(\d)([A-Za-z]*)(\d)/, 
+  function(match, p1, p2,p3) {return p3 + p2 + p1;})
+  
+  return newStr;
+         
+}
+
+
+
+
+
+
+
+
+function SwapII(str) { 
+  var swap = str.replace(/\d[a-z]+\d/ig,function(c){
+    return c[c.length-1] + c.match(/[a-z]+/ig).join('') + c[0];
+  });
+  var fullSwap = swap.replace(/[a-z]/ig,function(c){
+    if(c == c.toUpperCase()) return c.toLowerCase();
+    if(c == c.toLowerCase()) return c.toUpperCase();
+  });
+  return fullSwap;
+}

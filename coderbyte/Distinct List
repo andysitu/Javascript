@@ -1,0 +1,11 @@
+function DistinctList(arr) { 
+  var obj = {}, sum = 0;
+  arr.forEach(function(value) { obj[value] = (obj[value] || 0) + 1;});
+  
+  for (var key in obj) {
+    if (obj[key] > 0) {
+      sum += obj[key] - 1;  
+    }
+  }
+  return sum;       
+}
