@@ -1,0 +1,21 @@
+function bind(funct, obj) {
+  var arg = Array.prototype.slice.call(arguments, 2);
+  return function() {
+      var arg2 = Array.prototype.slice.call(arguments, 0);
+      return funct.apply(obj, arg.concat(arg2));
+  };
+}
+
+function list() {
+  return Array.prototype.slice.call(arguments);
+}
+
+var list1 = list(1, 2, 3); // [1, 2, 3]
+
+// Create a function with a preset leading argument
+var leadingThirtysevenList = bind(list, undefined, 37);
+
+var list2 = leadingThirtysevenList();
+console.log(list2);
+var list3 = leadingThirtysevenList(1, 2, 3); // [37, 1, 2, 3]
+console.log(list3);

@@ -1,0 +1,80 @@
+function unless(test, then) {
+  if (!test)
+  	then();	
+}
+
+function repeat(times, body) {
+  for (var i = 0; i < times; i ++) {
+    body(i);
+  }
+} 
+
+repeat(3, function(n) {
+  unless(n % 2, function() {
+    console.log(n, "is even");
+  });
+});
+
+
+function repeat(times, func) {
+	for (var i = 0; i < times; i++) {
+		func(i);
+	}
+}
+
+function unless(condition, func) {
+	if (!condition)
+		func();
+}
+
+repeat(3, function(n) {
+	unless(n % 2, console.log(n);)
+})
+
+function filter(array, test) {
+	var passed = [];
+	array.forEach(function(value) {
+		if (test(value))
+			passed.push(value);
+	})
+	return passed;
+}
+
+function map(array, callback) {
+	var newArray = [];
+	array.each(function(value){
+		newArray.push(callback(value, i, array));
+	});
+	return newArray;
+}
+
+function reduce(array, callback, start) {
+  if (start === undefined) {
+    start = 0;
+  }
+  array.forEach(function(value){
+  	start = callback(start, value);
+  });
+
+  return start;
+}
+
+function average(array) {
+	function sum(a, b) {
+	  return a + b;
+	}
+	return array.reduce(sum) / array.length;
+}
+
+function age(p) { return p.died - p.born; }
+function male(p) { return p.sex === 'm'; }
+function female(p) { return p.sex === 'f'; }
+
+// Get average age of females
+average(ancestry.filter(female).map(age));
+
+average(ancestry.filter(male).map(age));
+
+function bind(funct, obj) {
+  return funct.call(obj);
+}
