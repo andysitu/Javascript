@@ -1,0 +1,12 @@
+Grid constructor
+  prototype.isInside
+  prototype.get
+  prototype.set
+
+directions = {};
+
+function randomElement(array)
+
+function BouncingCirtter() {}
+
+BouncingCritter.prototype.act

@@ -1,0 +1,42 @@
+function SmartPlantEater() {
+  this.energy = 20;
+  this.plant = null;
+}
+
+SmartPlantEater.prototype.act = function(view) {
+  var space = view.find(" ");
+  if (this.energy > 45 && space) {
+    this.plant = null;
+    return {type: "reproduce", direction: space};
+  }
+  var plant = view.find("*");
+
+  if ( view.findAll("*").length >= 2) {
+    this.plant = plant;
+    return {type: "eat", direction: plant};
+  }
+  if (this.plant && !plant)
+    this.plant = null;
+  if (this.plant) {
+    return {type: "move", direction: plant};
+  }
+  if (space) {
+    this.plant = null;
+    return {type: "move", direction: space};
+  }
+};
+
+function Tiger() {
+  this.energy = 50;
+}
+
+Tiger.prototype.act = function(view) {
+  var space = view.find(" ");
+  if (this.energy > 150 && space)
+    return {type: "reproduce", direction: space};
+  var food = view.find("O");
+  if ((view.findAll("O").length >=2) || food && this.energy <= 50)
+    return {type: "eat", direction: food};
+  if (space)
+    return {type: "move", direction: space};
+};
