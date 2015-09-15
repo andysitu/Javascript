@@ -1,0 +1,12 @@
+var month = (function() {
+  var months = ["January", "February", "March", "April", "May", "June", "July",
+                 "August", "September", "October", "November", "December"];
+  return {
+    name: function(monthNumber) {
+      return months[monthNumber];
+    },
+    number: function(monthName) {
+      return months.indexOf(monthName);
+    }
+  };
+})();

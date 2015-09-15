@@ -1,0 +1,25 @@
+module "npc"
+  Plant
+  PlantEater
+  SmartPlantEater
+  Tiger
+  WallFollower
+  BouncingCritter
+  Wall
+  _dirPlus
+
+module "grid"
+  Vector
+  Grid
+  directions
+  directionNames
+
+module "world"
+  _randomElement
+  _elementFromChar
+  _charFromElement
+  World
+  LifelikeWorld
+  View
+
+
