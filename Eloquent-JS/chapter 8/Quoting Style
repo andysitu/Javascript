@@ -1,0 +1,4 @@
+var text = "I don't. I wondered about things. 'I'm the cook,' he said, 'it's my job.'";
+console.log(text.replace(/\W'(.+?)'(?!\w)/g, function(match, p1) {
+  return "\"" + p1 + "\"";}));
+// → "I'm the cook," he said, "it's my job."  
