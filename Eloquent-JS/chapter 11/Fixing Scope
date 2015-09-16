@@ -1,0 +1,21 @@
+specialForms["set"] = function(args, env) {
+  var proto = env;
+  if (!(args[0].name in env))
+      throw new ReferenceError("No such variable exist");
+  while (true) {
+    if (Object.prototype.hasOwnProperty.call(proto, args[0].name))
+      break;
+    if (proto == null)
+      break;
+    proto = Object.getPrototypeOf(proto);
+  }
+    proto[args[0].name] = env[args[1].name];
+};
+
+run("do(define(x, 4),",
+    "   define(setx, fun(val, set(x, val))),",
+    "   setx(50),",
+    "   print(x))");
+// → 50
+run("set(quux, true)");
+// → Some kind of ReferenceError

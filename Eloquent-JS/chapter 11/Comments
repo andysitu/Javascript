@@ -1,0 +1,15 @@
+function skipSpace(string) {
+  string = string.replace(/#.+\n/, "");
+  var first = string.search(/\S/);
+  if (first == -1) return "";
+  var start = string.search(/#/);
+  return string.slice(first);
+}
+
+console.log(parse("# hello\nx"));
+// → {type: "word", name: "x"}
+
+console.log(parse("a # one\n   # two\n()"));
+// → {type: "apply",
+//    operator: {type: "word", name: "a"},
+//    args: []}
