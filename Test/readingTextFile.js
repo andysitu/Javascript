@@ -14,8 +14,26 @@ function saveText() {
   };
 }
 
+function loadFile() {
+  var fileToLoad = document.getElementById("fileToLoad").files[0];
+  var fileReader = new FileReader();
+  fileReader.onload = function(event) {
+    console.log("done loading!", e.target.result);
+    var text = event.target.result;
+    document.getElementById("inputText").value = text;
+  }
+  fileReader.readAsText(fileToLoad, "UTF-8");
+}
 
 window.onload = function() {
   var saveButton = document.getElementById("saveFile");
   saveButton.onclick = saveText;
+
+  var loadFile = document.getElementById("loadFile");
+  loadFile.onclick = loadFile;
+
+  var fileToLoad = document.getElementById("fileToLoad");
+  fileToLoad.onchange = function(e) {
+    console.log("You uploaded a file!", e.target.files[0]);
+  }
 };
