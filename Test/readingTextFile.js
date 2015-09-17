@@ -14,15 +14,16 @@ function saveText() {
   };
 }
 
-function loadFile() {
+function loadFileEvent() {
   var fileToLoad = document.getElementById("fileToLoad").files[0];
   var fileReader = new FileReader();
   fileReader.onload = function(event) {
-    console.log("done loading!", e.target.result);
+    console.log("done loading!", event.target.result);
     var text = event.target.result;
     document.getElementById("inputText").value = text;
   }
   fileReader.readAsText(fileToLoad, "UTF-8");
+  console.log("wait");
 }
 
 window.onload = function() {
@@ -30,7 +31,7 @@ window.onload = function() {
   saveButton.onclick = saveText;
 
   var loadFile = document.getElementById("loadFile");
-  loadFile.onclick = loadFile;
+  loadFile.onclick = loadFileEvent;
 
   var fileToLoad = document.getElementById("fileToLoad");
   fileToLoad.onchange = function(e) {
