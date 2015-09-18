@@ -1,0 +1,56 @@
+<style>
+  .trail { /* className for the trail elements */
+    position: absolute;
+    height: 6px; width: 6px;
+    border-radius: 3px;
+    background: teal;
+  }
+  body {
+    height: 300px;
+  }
+</style>
+
+<script>
+  var images = ["", "", "", "", ""];
+  var count = 0;
+  function createImage(event) {
+    var div = document.createElement("div");
+    div.classList.add("trail");
+    div.style.left = (event.clientX - 3) + "px";
+    div.style.top = (event.clientY - 3) + "px";
+    document.body.appendChild(div, images[count]);
+    images[count] = div;
+    count++;
+    return count;
+  }
+  function replaceImage(event) {
+    if (count > 4)
+      count = 0;
+    var div = document.createElement("div");
+    div.classList.add("trail");
+    div.style.left = (event.clientX - 3) + "px";
+    div.style.top = (event.clientY - 3) + "px";
+    document.body.replaceChild(div, images[count]);
+    images[count] = div;
+    count++;
+  }
+
+  var scheduled = false;
+  document.body.addEventListener("mousemove", function moveIt(event) {
+    var count = createImage(event);
+    if (count > 4) {
+      count = 0;
+      event.target.removeEventListener("mousemove", moveIt);
+      event.target.addEventListener("mousemove", function(e) {
+        if (!scheduled) {
+          scheduled = true;
+          setTimeout(function() {
+            replaceImage(e);
+            scheduled = false;
+          }, 50);
+        }
+      });
+
+    }
+  });
+</script>

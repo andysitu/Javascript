@@ -1,0 +1,9 @@
+<input type="text">
+<script>
+  var field = document.querySelector("input");
+  field.addEventListener("keypress", function(event){
+    var letter = String.fromCharCode(event.charCode).toLowerCase();
+    if (letter === 'q' || letter === 'w' || letter === 'x')
+      event.preventDefault();
+  });
+</script>
