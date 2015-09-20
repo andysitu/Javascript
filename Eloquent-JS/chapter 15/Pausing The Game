@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="css/game.css">
+
+<body>
+<script>
+function trackKeys(status, codes) {
+  var pressed = Object.create(null);
+  function handler(event) {
+    if (codes.hasOwnProperty(event.keyCode)) {
+      var down = event.type == "keydown";
+      pressed[codes[event.keyCode]] = down;
+      event.preventDefault();
+    }
+  }
+  if (status) {
+    addEventListener("keydown", handler);
+    addEventListener("keyup", handler);
+  } else {
+    removeEventListener("keydown", handler);
+    removeEventListener("keyup", handler);
+  }
+  return pressed;
+} 
+  function runLevel(level, Display, andThen) {
+    var arrows = trackKeys(true, arrowCodes);
+    var paused = false;
+    addEventListener("keydown", function(e){
+      if (e.keyCode == 27)
+        paused = (paused === false);
+      if (!paused && e.keyCode === 27)
+        runAnimation(out);
+    });
+    var display = new Display(document.body, level);
+    var out = function(step) {
+      level.animate(step, arrows);
+      display.drawFrame(step);
+      if (paused)
+        return false;
+      if (level.isFinished()) {
+        display.clear();
+        if (andThen)
+          andThen(level.status);
+        var arrows = trackKeys(false, arrowCodes);
+        return false;
+      }
+    }
+    runAnimation(out);
+  }
+  runGame(GAME_LEVELS, DOMDisplay);
+</script>
+</body>

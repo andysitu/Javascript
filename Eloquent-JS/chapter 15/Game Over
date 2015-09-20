@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="css/game.css">
+
+<body>
+<script>
+  function runGame(plans, Display) {
+    function startLevel(n, lives) {
+      runLevel(new Level(plans[n]), Display, function(status) {
+        if (status == "lost") {
+          lives--;
+          if (lives > 0) {
+            startLevel(n, lives);
+          } else
+            startLevel(0, 3);
+        } else if (n < plans.length - 1)
+          startLevel(n + 1, lives);
+        else
+          console.log("You win!");
+      });
+    }
+    startLevel(0, 3);
+  }
+  runGame(GAME_LEVELS, DOMDisplay);
+</script>
+</body>
