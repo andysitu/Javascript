@@ -1,0 +1,9 @@
+var req = new XMLHttpRequest();
+req.open("GET", "/author", true);
+req.setRequestHeader("Accept", "application/rainbows+unicorns");
+//req.setRequestHeader("Accept", "text/html");
+//req.setRequestHeader("Accept", "text/plain");
+req.addEventListener("load", function() {
+  console.log(req.responseText);
+});
+req.send(null);
