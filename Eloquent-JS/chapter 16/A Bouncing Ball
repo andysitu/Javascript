@@ -1,0 +1,44 @@
+<canvas width="400" height="400"></canvas>
+<script>
+  var cx = document.querySelector("canvas").getContext("2d");
+  
+  function Ball() {
+    this.vector = new Vector(20,20);
+    this.speedX = 100;
+    this.speedY = 200;
+    this.radius = 10;
+  }
+  
+  Ball.prototype.move = function(step) {
+    var test = this.vector.plus( new Vector(Math.floor(this.speedX * step), Math.floor(this.speedY * step)) );
+    if (test.x + this.radius > 400)
+      this.speedX = -Math.abs(this.speedX);
+    if (test.x - this.radius < 0)
+      this.speedX = Math.abs(this.speedX);
+    if (test.y + this.radius > 400)
+      this.speedY = -Math.abs(this.speedY);
+    if (test.y - this.radius < 0)
+      this.speedY = Math.abs(this.speedY);
+    this.vector = test;
+  }
+  var ball = new Ball();
+  cx.fillStyle = "red";
+  
+  var lastTime = null;
+  function frame(time) {
+    if (lastTime != null)
+      updateAnimation(Math.min(100, time - lastTime) / 1000);
+    lastTime = time;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  
+  function updateAnimation(step) {
+    ball.move(step);
+    cx.beginPath();
+    cx.arc(ball.vector.x,ball.vector.y,ball.radius,0,7);
+    cx.closePath();
+    cx.clearRect(0,0,400,400);
+    cx.fill();
+  }
+</script>

@@ -1,0 +1,95 @@
+<canvas width="600" height="200"></canvas>
+<script>
+  var cx = document.querySelector("canvas").getContext("2d");
+
+  function drawTrapezoid(ctx, x1, y1, x2, y2, length) {
+    ctx.save();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x1 + length, y1);
+    ctx.lineTo(x1 + length - (x2 - x1), y2);
+    ctx.lineTo(x2, y2);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
+  }
+  
+  drawTrapezoid(cx, 10, 50, 30, 10, 50);
+</script>
+
+
+<canvas width="600" height="200"></canvas>
+<script>
+  var cx = document.querySelector("canvas").getContext("2d");
+
+  function drawDiamond(ctx, x, y, length) {
+    ctx.save();
+    ctx.fillStyle = "green";
+    var startX = x - length / 2,
+        startY = y - length / 2;
+    ctx.fillRect(x, y, 1, 1);
+    ctx.fillStyle = "red";
+    ctx.translate(x, y);
+    ctx.rotate(Math.PI / 4);
+    ctx.fillRect(-length/2, -length/2, length, length);
+    ctx.restore();
+  }
+  
+  drawDiamond(cx, 50, 50, 50);
+</script>
+
+<canvas width="600" height="200"></canvas>
+<script>
+  var cx = document.querySelector("canvas").getContext("2d");
+  function zigZag(ctx, x, y, length, height, times) {
+    ctx.save();
+    ctx.moveTo(x,y);
+    for (var i = 0; i < times; i++) {
+      ctx.lineTo(x + length, y + height / 2 + height * i);
+      ctx.lineTo(x, y + height + height * i);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+  
+  zigZag(cx, 10, 10, 30, 10, 6);
+  
+</script>
+
+<canvas width="600" height="200"></canvas>
+<script>
+  var cx = document.querySelector("canvas").getContext("2d");
+
+  function spiral(ctx, x, y) {
+    ctx.save();
+    ctx.fillStyle = "black";
+    var pi = Math.PI/ 180;
+    for (var i = 0, j = 1; i < 1000; i++, j++) {
+        var x1 = (x + i/15 * Math.cos(i * pi));
+        var y1 = (y + i/15 * Math.sin(i * pi));
+        ctx.fillRect(x1, y1, 1, 1);
+    }
+    ctx.restore();
+  }
+  
+  spiral(cx, 100, 100);
+</script>
+
+<canvas width="600" height="200"></canvas>
+<script>
+  var cx = document.querySelector("canvas").getContext("2d");
+  function star(ctx, x, y, radius) {
+    var pi = Math.PI / 4;
+    var coordinates = [];
+    ctx.moveTo(x + radius, y);
+    console.log(coordinates);
+    for (var i = 0; i < 8; i++) {
+      var coord = pi * ((i+ 1) % 8); 
+      ctx.quadraticCurveTo(x, y, Math.cos(coord) * radius + x, Math.sin(coord) * radius + y);
+    };
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.save();
+    ctx.restore();
+  }
+  star(cx, 100, 100, 50);
+</script>
