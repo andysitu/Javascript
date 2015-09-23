@@ -1,0 +1,75 @@
+<div id="grid"></div>
+<button id="next">Next generation</button>
+
+<script>
+  var next = document.getElementById("next");
+  var array = [],
+      row = 5,
+      column = 5;
+  for (var i = 0; i < row; i++) {
+    array[i] = [];
+    for (var j = 0; j < column; j++){
+      var number = Math.random();
+      array[i].push( number > 0.50 ? true: false );
+    }
+  }
+  var grid = document.getElementById("grid");
+  function makeGrid() {
+    var frag = document.createElement("div");
+    array.forEach(function(row, i) {
+      var rowDiv = document.createElement("div");
+      row.forEach(function(cell, j) {
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        if (cell == 1)
+          input.checked = true;
+        input.addEventListener("click", function(e) {
+          array[i][j] = e.target.checked;
+        })
+        rowDiv.appendChild(input);
+      });
+      frag.appendChild(rowDiv);
+    });
+    if (grid.firstChild) {
+      grid.replaceChild(frag, grid.firstChild);  
+    } else 
+      grid.appendChild(frag);
+  }
+  function inspectGrid() {
+    array = array.map(function(row, i){
+      return row.map(function(cell, j){
+        var live = countLive(i,j);
+        if (cell == false && live == 3)
+          return true;
+        if ((cell) && (live == 2 || live == 3))
+          return true;
+        return false;
+      });
+    });
+  }
+  makeGrid();
+  function isValid(i,j) {
+  if (i < 0 || j < 0 || i >= array.length || j >= array[i].length)
+      return false;
+    return true;
+  }
+  function countLive(i, j) {
+    var count = 0;
+    var values = [-1, 0, 1];
+    values.forEach(function(value1) {
+      values.forEach( function(value2) {
+        if (value1 == 0 && value2 == 0)
+          return;
+    var newI = i + value1, newJ = j + value2;
+        if (isValid(newI, newJ) && array[newI][newJ])
+          count++;
+      });
+    });
+    return count;
+  }
+  
+  next.addEventListener("click", function(){
+    inspectGrid();
+    makeGrid();
+  });
+</script>
