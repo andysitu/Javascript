@@ -1,0 +1,28 @@
+<script>
+  tools.Rectangle = function(event, cx) {
+    var currentPos = relativePos(event, cx.canvas);
+    var exRect = document.createElement("div");
+    
+    exRect.style.position = "absolute";
+    exRect.style.background = cx.fillStyle;
+    document.body.appendChild(exRect);
+    trackDrag(function(moveEvent){
+      exRect.style.width = Math.abs(moveEvent.clientX - event.clientX) + "px";
+      exRect.style.left = Math.min(moveEvent.clientX, event.clientX) + "px";
+      exRect.style.top =Math.min(event.clientY, moveEvent.clientY) + "px";
+      exRect.style.height =Math.abs(event.clientY - moveEvent.clientY) + "px";
+    }, 
+              function(event){
+      endPos = relativePos(event, cx.canvas);
+      document.body.removeChild(exRect);
+      cx.fillRect(currentPos.x, currentPos.y,
+                  endPos.x - currentPos.x,
+                  endPos.y - currentPos.y);
+    });
+  };
+</script>
+
+<link rel="stylesheet" href="css/paint.css">
+<body>
+  <script>createPaint(document.body);</script>
+</body>

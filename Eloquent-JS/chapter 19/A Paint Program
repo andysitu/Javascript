@@ -1,0 +1,70 @@
+<!doctype html>
+<script src="code/chapter/19_paint.js"></script>
+
+<script>
+  tools["Flood fill"] = function(event, cx) {
+    var canvas = cx.canvas;
+    var pos = relativePos(event, canvas);
+    function getData(cx) {
+      return cx.getImageData(0, 0, cx.canvas.width, cx.canvas.height).data;
+    }
+    function pixelAt(data, x, y) {
+      var start = (x + y * canvas.width) * 4;
+      var string = "";
+      for (var i = 0; i < 4; i++) {
+        string += (data[ start + i ]) + " "; 
+      }
+      return string;
+    }
+    function getRGBA(data, x, y, i) {
+      var start = (x + y * canvas.width) * 4;
+      return data[start + i];
+    }
+    function compare(data, x, y, colorArray) {
+      var data = pixelAt(data, x, y);
+      for (var i = 0; i < 4; i++) {
+        if (data[i] != colorArray[i])
+            return false;
+      }
+      return true;
+    }
+    function isValid(x,y) {
+      if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height)
+        return false;
+      else
+        return true;
+    }
+    function changeFour(data, x, y, color, memo) {
+      var loc = x + " " + y;
+      if (isValid(x+1, y)) {  
+        if ( loc in memo) {
+          //console.log(loc);
+          return;
+        } else if (pixelAt(data, x, y) != color) {
+          //console.log("different color", x, y);
+          memo[loc] = false;
+          return;
+        } else {
+         cx.fillRect(x,y,1,1);
+         memo[loc] = true;
+         changeFour(data, x+1, y, color, memo);
+         changeFour(data, x-1, y, color, memo);
+         changeFour(data, x, y+1, color, memo);
+         changeFour(data, x, y-2, color, memo);
+        }
+      }
+    }
+    function start(data, x, y, memo) {
+      var pixelArray = pixelAt(data, x, y);
+      changeFour(data, x, y, pixelArray, memo);
+    }
+    var history = {};
+    var data = getData(cx);
+    start(data, pos.x, pos.y, history);
+  };
+</script>
+
+<link rel="stylesheet" href="css/paint.css">
+<body>
+  <script>createPaint(document.body);</script>
+</body>

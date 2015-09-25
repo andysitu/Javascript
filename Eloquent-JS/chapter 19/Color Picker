@@ -1,0 +1,24 @@
+<script>
+  tools["Pick color"] = function(event, cx) {
+    var currentPos = relativePos(event, cx.canvas);
+    function pixelAt(cx, x, y) {
+      try {
+        return cx.getImageData(x, y, 1, 1).data;
+      } catch (e) {
+        if (e instanceof SecurityError)
+          alert("Can't save: " + e.toString());
+        else
+          throw e;
+      }
+    }
+    var data = pixelAt(cx, currentPos.x, currentPos.y);
+    var color = "rgb(" + data[0] +"," + data[1] + "," + data[2] +")";
+    cx.fillStyle = color;
+    cx.strokeStyle = color;
+  };
+</script>
+
+<link rel="stylesheet" href="css/paint.css">
+<body>
+  <script>createPaint(document.body);</script>
+</body>
