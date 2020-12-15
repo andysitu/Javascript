@@ -66,8 +66,8 @@ app.get('/', (req, res) => {
 function get_token(code) {
   return new Promise(function(resolve, reject) {
     var data = {
-      client_id: "1070730762428-cqvjbp5l7kvnvj9a7l1nmucp9ok81u4u.apps.googleusercontent.com",
-      client_secret: "7o2qjgzcgelXywYUW2Z9-a2H",
+      client_id: "",
+      client_secret: "",
       code: code,
       redirect_uri: "https://oauth.appspot.com/oauth",
       grant_type: "authorization_code",
@@ -185,7 +185,7 @@ app.get('/oauth-redirect', (req, res) => {
 scope=profile+email&\
 redirect_uri=https%3A//oauth.appspot.com/oauth&\
 state=${state}&\
-client_id=1070730762428-cqvjbp5l7kvnvj9a7l1nmucp9ok81u4u.apps.googleusercontent.com`;
+client_id=`;
 
   res.redirect(url);
 });

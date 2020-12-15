@@ -8,8 +8,8 @@ const https = require('https');
 
 const hbs = require("hbs");
 
-var client_id = "46070418507-9o3105jqa5nnt4b6d2i7fqgq541t5b2r.apps.googleusercontent.com",
-    client_secret = "AiSDX1lQRSqC9h8ambSHYNuE";
+var client_id = "",
+    client_secret = "";
 
 var site_protocol = "https",
     domain = "proj1-situ.appspot.com";
