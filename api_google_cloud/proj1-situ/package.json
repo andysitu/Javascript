@@ -1,0 +1,27 @@
+{
+  "name": "proj1-situ",
+  "version": "1.0.0",
+  "description": "Restful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Andy Situ",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/connect-datastore": "^4.0.0",
+    "@google-cloud/datastore": "^5.1.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "express-jwt": "^5.3.3",
+    "express-session": "^1.17.1",
+    "hbs": "^4.1.1",
+    "jwks-rsa": "^1.8.0"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {}
+}
