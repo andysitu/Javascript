@@ -17,7 +17,7 @@ function count(array){
   var obj = {};
   
   array.forEach(function(value, key) {
-    obj[value] ? obj[value] += 1 : obj[value = 1];
+    obj[value] ? obj[value] += 1 : obj[value] = 1;
   });
   
   return obj;
